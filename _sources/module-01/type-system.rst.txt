@@ -417,7 +417,7 @@ Additional type aliases may be introduced through a type definition (`typedef`)
 mechanism. This allows an implementation to choose an underlying type based on
 need, and abstract away that decision, in order to write code that is more
 portable. This is the source of many additional type aliases we will come
-across later on, such as `size_t`.
+across later on, such as :hi:`kt{size_t}`.
 
 Additional Type Categories
 ==========================
