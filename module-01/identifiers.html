@@ -141,26 +141,16 @@ space. This includes enumeration constants.</p></li>
 <h2>Scope<a class="headerlink" href="#scope" title="Permalink to this heading"></a></h2>
 <p>Identifiers have an associated scope, which is the portion of the program where
 an identifier is visible:</p>
-<ul class="simple">
-<li><p><strong>Function Scope</strong> &amp;ndash; Labels have function scope, and may be referred to
-from anywhere within the entire body of the function in which they appear. No other
-identifiers have function scope.</p></li>
-<li><p><strong>File Scope</strong> &amp;ndash; Identifiers declared outside of any block have file
-scope which begins at the point of declaration and terminates at the end of
-the translation unit.</p></li>
-<li><p><strong>Block Scope</strong> &amp;ndash; Identifiers declared inside of a block or in a list
-of function definition parameters have block scope that begins at the point
-of declaration and terminates at the closing brace “}” of the associated
-block. Identifiers have the same scope if they terminate at the same point
-(belong to the same block). If an identifier in a nested block has the same
-name as an identifier in an enclosing block, it hides the identifier from the
-enclosing block while it is in scope.</p></li>
-<li><p><strong>Function Prototype Scope</strong> &amp;ndash; Identifiers declared in a function
-prototype belong to a scope that terminates at the end of the prototype
-declarator. This exists solely to allow for a special and rarely used
-array-style notation for function parameters, which can use back-references
-to function parameters appearing earlier in the parameter list. e.g. <span class="c-texpr sig sig-inline highlight c">void f(size_t n, char arr[n]);</span></p></li>
-</ul>
+<p class="rubric">Function Scope</p>
+<p>Labels have function scope, and may be referred to from anywhere within the entire body of the function in which they appear. No other identifiers have function scope.</p>
+<p class="rubric">File Scope</p>
+<p>Identifiers declared outside of any block have file scope which begins at the point of declaration and terminates at the end of the translation unit.</p>
+<p class="rubric">Block Scope</p>
+<p>Identifiers declared inside of a block or in a list of function definition parameters have block scope that begins at the point of declaration and terminates at the closing brace “}” of the associated block. Identifiers have the same scope if they terminate at the same point (belong to the same block). If an identifier in a nested block has the same name as an identifier in an enclosing block, it hides the identifier from the enclosing block while it is in scope.</p>
+<blockquote>
+<div><p class="rubric">Function Prototype Scope</p>
+</div></blockquote>
+<p>Identifiers declared in a function prototype belong to a scope that terminates at the end of the prototype declarator. This exists solely to allow for a special and rarely used array-style notation for function parameters, which can use back-references to function parameters appearing earlier in the parameter list. e.g. <span class="c-texpr sig sig-inline highlight c">void f(size_t n, char arr[n]);</span></p>
 </section>
 <section id="linkage">
 <h2>Linkage<a class="headerlink" href="#linkage" title="Permalink to this heading"></a></h2>

@@ -50,26 +50,21 @@ Scope
 Identifiers have an associated scope, which is the portion of the program where
 an identifier is visible:
 
+.. rubric:: Function Scope
 
-* **Function Scope** &ndash; Labels have function scope, and may be referred to
-  from anywhere within the entire body of the function in which they appear. No other
-  identifiers have function scope.
-* **File Scope** &ndash; Identifiers declared outside of any block have file
-  scope which begins at the point of declaration and terminates at the end of
-  the translation unit.
-* **Block Scope** &ndash; Identifiers declared inside of a block or in a list
-  of function definition parameters have block scope that begins at the point
-  of declaration and terminates at the closing brace "}" of the associated
-  block. Identifiers have the same scope if they terminate at the same point
-  (belong to the same block). If an identifier in a nested block has the same
-  name as an identifier in an enclosing block, it hides the identifier from the
-  enclosing block while it is in scope.
-* **Function Prototype Scope** &ndash; Identifiers declared in a function
-  prototype belong to a scope that terminates at the end of the prototype
-  declarator. This exists solely to allow for a special and rarely used
-  array-style notation for function parameters, which can use back-references
-  to function parameters appearing earlier in the parameter list. e.g. `void
-  f(size_t n, char arr[n]);`
+Labels have function scope, and may be referred to from anywhere within the entire body of the function in which they appear. No other identifiers have function scope.
+
+.. rubric:: File Scope
+
+Identifiers declared outside of any block have file scope which begins at the point of declaration and terminates at the end of the translation unit.
+
+.. rubric:: Block Scope
+
+Identifiers declared inside of a block or in a list of function definition parameters have block scope that begins at the point of declaration and terminates at the closing brace "}" of the associated block. Identifiers have the same scope if they terminate at the same point (belong to the same block). If an identifier in a nested block has the same name as an identifier in an enclosing block, it hides the identifier from the enclosing block while it is in scope.
+
+ .. rubric:: Function Prototype Scope
+
+Identifiers declared in a function prototype belong to a scope that terminates at the end of the prototype declarator. This exists solely to allow for a special and rarely used array-style notation for function parameters, which can use back-references to function parameters appearing earlier in the parameter list. e.g. `void f(size_t n, char arr[n]);`
 
 Linkage
 -------
