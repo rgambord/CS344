@@ -37,8 +37,8 @@ identifiers, and the name space used to resolve an identifier is determined by
 the context in which it appears:
 
 
-* **Label Names** &ndash; for use with ``goto`` statements.
-* **Tag Names** &ndash; for use with ``struct``\ , ``union``\ , and ``enum``.
+* **Label Names** &ndash; for use with :hi:`k{goto}` statements.
+* **Tag Names** &ndash; for use with :hi:`k{struct}`\ , :hi:`k{union}`\ , and :hi:`k{enum}`.
 * **Member Names** &ndash; each structure or union has a separate name space
   for its members.
 * **Ordinary Identifiers** &ndash; all other identifiers occupy the same name
@@ -68,8 +68,8 @@ an identifier is visible:
   prototype belong to a scope that terminates at the end of the prototype
   declarator. This exists solely to allow for a special and rarely used
   array-style notation for function parameters, which can use back-references
-  to function parameters appearing earlier in the parameter list. e.g. ``void
-  f(size_t n, char arr[n]);``.
+  to function parameters appearing earlier in the parameter list. e.g. `void
+  f(size_t n, char arr[n]);`
 
 Linkage
 -------
@@ -89,19 +89,14 @@ other scopes:
   explicitly extern variables, and file-scope non-static variables are
   externally linked.
 
+.. note::
 
-.. raw:: html
+   Objects with externally-linked identifiers are often casually referred to as
+   "global" variables. However, objects with internally-liked identifiers are
+   often also called global variables, as well.
 
-   <div class="notebox">
-
-   **Global Variables**
-
-   Externally linked identifiers are often referred to as "global" variables.
-   However, C programmers also often refer to internally-linked file-scope
-   identifiers as global, as well. Pay close attention to the context this term is
-   used in, and provide or ask for clarification if the meaning is ambiguous.
-
-   </div>
+   Pay close attention to the context this term is used in, and provide or ask
+   for clarification if the meaning is ambiguous or the distinction is relevant.
 
 
 Exercises

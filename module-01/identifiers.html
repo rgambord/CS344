@@ -129,8 +129,8 @@ variable declarations.</p>
 identifiers, and the name space used to resolve an identifier is determined by
 the context in which it appears:</p>
 <ul class="simple">
-<li><p><strong>Label Names</strong> &amp;ndash; for use with <code class="docutils literal notranslate"><span class="pre">goto</span></code> statements.</p></li>
-<li><p><strong>Tag Names</strong> &amp;ndash; for use with <code class="docutils literal notranslate"><span class="pre">struct</span></code>, <code class="docutils literal notranslate"><span class="pre">union</span></code>, and <code class="docutils literal notranslate"><span class="pre">enum</span></code>.</p></li>
+<li><p><strong>Label Names</strong> &amp;ndash; for use with <span class="sig sig-inline highlight c"><span class="k">goto</span></span> statements.</p></li>
+<li><p><strong>Tag Names</strong> &amp;ndash; for use with <span class="sig sig-inline highlight c"><span class="k">struct</span></span>, <span class="sig sig-inline highlight c"><span class="k">union</span></span>, and <span class="sig sig-inline highlight c"><span class="k">enum</span></span>.</p></li>
 <li><p><strong>Member Names</strong> &amp;ndash; each structure or union has a separate name space
 for its members.</p></li>
 <li><p><strong>Ordinary Identifiers</strong> &amp;ndash; all other identifiers occupy the same name
@@ -159,8 +159,7 @@ enclosing block while it is in scope.</p></li>
 prototype belong to a scope that terminates at the end of the prototype
 declarator. This exists solely to allow for a special and rarely used
 array-style notation for function parameters, which can use back-references
-to function parameters appearing earlier in the parameter list. e.g. <code class="docutils literal notranslate"><span class="pre">void</span>
-<span class="pre">f(size_t</span> <span class="pre">n,</span> <span class="pre">char</span> <span class="pre">arr[n]);</span></code>.</p></li>
+to function parameters appearing earlier in the parameter list. e.g. <span class="c-texpr sig sig-inline highlight c">void f(size_t n, char arr[n]);</span></p></li>
 </ul>
 </section>
 <section id="linkage">
@@ -179,16 +178,15 @@ from any translation unit in the entire program. All non-static functions,
 explicitly extern variables, and file-scope non-static variables are
 externally linked.</p></li>
 </ul>
-<div class="notebox">
-
-**Global Variables**
-
-Externally linked identifiers are often referred to as "global" variables.
-However, C programmers also often refer to internally-linked file-scope
-identifiers as global, as well. Pay close attention to the context this term is
-used in, and provide or ask for clarification if the meaning is ambiguous.
-
-</div><section id="exercises">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Objects with externally-linked identifiers are often casually referred to as
+“global” variables. However, objects with internally-liked identifiers are
+often also called global variables, as well.</p>
+<p>Pay close attention to the context this term is used in, and provide or ask
+for clarification if the meaning is ambiguous or the distinction is relevant.</p>
+</div>
+<section id="exercises">
 <h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Exercise instructions / question prompt. [embedded exercise]</p></li>
