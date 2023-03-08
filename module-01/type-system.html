@@ -131,43 +131,43 @@ describes an object, but lacks size and/or alignment information necessary to
 construct an object of that type.</p>
 <p>The C type-system consists of the following types, with any aliases shown in
 parentheses. Typenames and their aliases consisting of multiple words may be
-written with those words in any order (e.g. <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code> and <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span><span class="w"> </span><span class="kt">long</span></code> are the same type).</p>
+written with those words in any order (e.g. <span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span> and <span class="c-texpr sig sig-inline highlight c"><span class="kt">int</span><span class="w"> </span><span class="kt">long</span></span> are the same type).</p>
 <dl class="simple">
 <dt>Special Types</dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span></p></li>
 <li><p>Enumeration Types</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="simple glossary">
 <dt id="term-Signed-Integer-Types">Signed Integer Types<a class="headerlink" href="#term-Signed-Integer-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">short</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">int</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span>, <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
 </ul>
 </dd>
 <dt id="term-Unsigned-Integer-Types">Unsigned Integer Types<a class="headerlink" href="#term-Unsigned-Integer-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">_Bool</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span></code>)</p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">_Bool</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span></span>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span> (<span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></span>)</p></li>
 </ul>
 </dd>
 <dt id="term-Real-Floating-Types">Real Floating Types<a class="headerlink" href="#term-Real-Floating-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">float</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">double</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span></code></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">float</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">double</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span></span></p></li>
 </ul>
 </dd>
 <dt id="term-Complex-Types">Complex Types<a class="headerlink" href="#term-Complex-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">float</span><span class="w"> </span><span class="kt">_Complex</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">double</span><span class="w"> </span><span class="kt">_Complex</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="kt">_Complex</span></code></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">float</span><span class="w"> </span><span class="kt">_Complex</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">double</span><span class="w"> </span><span class="kt">_Complex</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="kt">_Complex</span></span></p></li>
 </ul>
 </dd>
 <dt id="term-Derived-Types">Derived Types<a class="headerlink" href="#term-Derived-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
@@ -184,17 +184,17 @@ written with those words in any order (e.g. <code class="code highlight c docuti
 <p>These types are used for special purposes.</p>
 <section id="void">
 <h3>void<a class="headerlink" href="#void" title="Permalink to this heading"></a></h3>
-<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> type is used to indicate the absence of type where it would it
-would normally be syntactically required. By definition, <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> is an
+<p>The <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span> type is used to indicate the absence of type where it would it
+would normally be syntactically required. By definition, <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span> is an
 incomplete type that <em>cannot be completed</em>, so it is impossible to create,
-inspect, or manipulate an object of type <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code>. Nevertheless, it has three
+inspect, or manipulate an object of type <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span>. Nevertheless, it has three
 important uses:</p>
 <ul class="simple">
-<li><p>A function declared as returning <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> does not return anything (The
+<li><p>A function declared as returning <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span> does not return anything (The
 technical term is <em>procedure</em>)</p></li>
-<li><p>A function declared with <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> as its parameter list has no parameters
+<li><p>A function declared with <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span> as its parameter list has no parameters
 (The technical term is <em>nullary</em>)</p></li>
-<li><p>A pointer to <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> (i.e. <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span><span class="w"> </span><span class="o">*</span></code>) is a universal pointer which can point to
+<li><p>A pointer to <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span> (i.e. <span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span><span class="p">*</span></span>) is a universal pointer which can point to
 an object of any type. Pointers to a particular type may be freely converted
 to pointers to void and back again without loss of information; this is often
 used to implement parametric polymorphism (generic programming).</p></li>
@@ -202,22 +202,22 @@ used to implement parametric polymorphism (generic programming).</p></li>
 </section>
 <section id="char">
 <h3>char<a class="headerlink" href="#char" title="Permalink to this heading"></a></h3>
-<p>A <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> (pronounced /t͡ʃɑɹ/, as in “<em>char*coal”) is the smallest and most
+<p>A <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> (pronounced /t͡ʃɑɹ/, as in “<em>char*coal”) is the smallest and most
 fundamental data type, defined to have a size of 1 (i.e. `sizeof (char) == 1`)
-and is synonymous with *byte</em>. The <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> type is used for representing
+and is synonymous with *byte</em>. The <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> type is used for representing
 ASCII-encoded characters, which is the basis for its name. The macro,
-<code class="code highlight c docutils literal highlight-c"><span class="n">CHAR_BIT</span></code>, is defined by the implementation as the number of bits in a <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code>
+<span class="c-texpr sig sig-inline highlight c"><span class="n">CHAR_BIT</span></span>, is defined by the implementation as the number of bits in a <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span>
 and must be at least 8.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>While the size of a byte on many modern systems is 8 bits, many embedded and
 specialty environments have a larger intrinsic byte size. You must check
-<code class="code highlight c docutils literal highlight-c"><span class="n">CHAR_BIT</span></code> when your code depends on its value!</p>
+<span class="c-texpr sig sig-inline highlight c"><span class="n">CHAR_BIT</span></span> when your code depends on its value!</p>
 </div>
 </section>
 <section id="enumeration-types">
 <h3>Enumeration Types<a class="headerlink" href="#enumeration-types" title="Permalink to this heading"></a></h3>
-<p>An enumeration (<code class="code highlight c docutils literal highlight-c"><span class="k">enum</span></code>) maps a list of identifiers to constant integer values,
+<p>An enumeration (<span class="c-texpr sig sig-inline highlight c">enum</span>) maps a list of identifiers to constant integer values,
 and is commonly used to assign a group of related identifiers with mutually
 unique values when the value of each is otherwise arbitrary. For example, an
 enumeration might assign an arbitrary integer value to each of a list of color
@@ -315,25 +315,25 @@ register sizes:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></td>
+<tr class="row-even"><td><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span></p></td>
 <td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">al</span></code> and <code class="code highlight asm docutils literal highlight-asm"><span class="nf">ah</span></code></p></td>
 <td><p>8</p></td>
 <td><p><img class="math" src="../_images/math/ca916244d4ea502febd3d42c770f5af55b561a3a.svg" alt="\pm 2^7 - 1"/></p></td>
 <td><p><img class="math" src="../_images/math/002ef02ba23289ca8ffdada48ad1c6485233a167.svg" alt="2^8 - 1"/></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code></p></td>
+<tr class="row-odd"><td><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">short</span></span></p></td>
 <td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">ax</span></code></p></td>
 <td><p>16</p></td>
 <td><p><img class="math" src="../_images/math/5e1d290ceb5bbd11522557fb769d172ccf9e69d5.svg" alt="\pm 2^{15} - 1"/></p></td>
 <td><p><img class="math" src="../_images/math/f8f8f1780480f08cc4b5c491fd8e42ace2586716.svg" alt="2^16 - 1"/></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span></code></p></td>
+<tr class="row-even"><td><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span></span></p></td>
 <td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">eax</span></code></p></td>
 <td><p>32</p></td>
 <td><p><img class="math" src="../_images/math/5bc53c3b22b82f99f7d0c383538cf37d56a7ad1c.svg" alt="\pm 2^{31} - 1"/></p></td>
 <td><p><img class="math" src="../_images/math/afd7ac13fa0564d0affd789f5e201a4d772829d8.svg" alt="2^32 - 1"/></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code></p></td>
+<tr class="row-odd"><td><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span></p></td>
 <td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">rax</span></code></p></td>
 <td><p>64</p></td>
 <td><p><img class="math" src="../_images/math/f92783a3ac676ea5c10d20ab4d68d41f937d569e.svg" alt="\pm 2^{63} - 1"/></p></td>
@@ -384,7 +384,7 @@ data models are LLP64 (Windows) and LP64 (Unix) are almost equivalent:</p>
 <p>The precision of each type can be larger than the minimum specified, but the following
 ranking of precision must be observed by the implementation, so that each type can
 represent any value of a type that it outranks:</p>
-<p><code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code></p>
+<p><span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span> ≤ <span class="c-texpr sig sig-inline highlight c"><span class="kt">short</span></span> ≤ <span class="c-texpr sig sig-inline highlight c"><span class="kt">int</span></span> ≤ <span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span></span> ≤ <span class="c-texpr sig sig-inline highlight c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span></p>
 </section>
 </section>
 <section id="special-integer-types">
@@ -393,59 +393,58 @@ represent any value of a type that it outranks:</p>
 from the other integer types.</p>
 <section id="int">
 <h3>int<a class="headerlink" href="#int" title="Permalink to this heading"></a></h3>
-<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> data type (pronounced /ɪnt/, a contraction of “integer”) is a special
+<p>The <span class="c-texpr sig sig-inline highlight c"><span class="kt">int</span></span> data type (pronounced /ɪnt/, a contraction of “integer”) is a special
 type that is designated as the optimal type for arithmetic and logical
 operations because it is implemented as the native word size of the processor’s
 registers. Compilers often also include special optimizations to make typical uses
-of <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> even faster than other data types. The minimum range/size of <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> is
-equivalent to that of <code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code>.</p>
+of <span class="c-texpr sig sig-inline highlight c"><span class="kt">int</span></span> even faster than other data types. The minimum range/size of <span class="c-texpr sig sig-inline highlight c"><span class="kt">int</span></span> is
+equivalent to that of <span class="c-texpr sig sig-inline highlight c"><span class="kt">short</span></span>.</p>
 </section>
 <section id="unsigned-char">
 <h3>unsigned char<a class="headerlink" href="#unsigned-char" title="Permalink to this heading"></a></h3>
-<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> data type is special in that it cannot have padding bits
+<p>The <span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span> data type is special in that it cannot have padding bits
 and it is required to use pure binary represenation (bit 0 represents <img class="math" src="../_images/math/e7d80456d2ffbf58d0961bc8c9d5583eb18b93a5.svg" alt="2^0"/>,
-bit 1 represents <img class="math" src="../_images/math/abc977599b57a5bc63b53b68ea096fcd09ef5435.svg" alt="2^1"/>, and so on). Thus, <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> is used to represent
+bit 1 represents <img class="math" src="../_images/math/abc977599b57a5bc63b53b68ea096fcd09ef5435.svg" alt="2^1"/>, and so on). Thus, <span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span> is used to represent
 and manipulate raw binary data. Any object can be copied into an object of type
-<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></code>, where <code class="code highlight c docutils literal highlight-c"><span class="n">n</span></code> is the size of the object in
+<span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></span>, where <span class="c-texpr sig sig-inline highlight c"><span class="n">n</span></span> is the size of the object in
 bytes, which is called its <em>object representation</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Three char types</strong></p>
-<p>Originally, there was no <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code> keyword: all integers are implicitly signed
-unless explicitly declared <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span></code>. The one exception to this rule is the
-<code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> data type. Some compilers followed the rule for other integers and
-implemented <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> as a signed type, with the <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> counterpart.
-Others, however, implemented <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> as unsigned, and thus there was no signed
+<p>Originally, there was no <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span></span> keyword: all integers are implicitly signed
+unless explicitly declared <span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span></span>. The one exception to this rule is the
+<span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> data type. Some compilers followed the rule for other integers and
+implemented <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> as a signed type, with the <span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span> counterpart.
+Others, however, implemented <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> as unsigned, and thus there was no signed
 version available at all!</p>
-<p>This may seem odd, but it actually makes a lot of sense. The <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> type has
+<p>This may seem odd, but it actually makes a lot of sense. The <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> type has
 always been used for representing text characters. Character encoding works
 by enumerating all the characters in a given set with positive values called
-their codepoints, so using a signed <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> just wastes half of the available
+their codepoints, so using a signed <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> just wastes half of the available
 range on negative numbers that are never used.</p>
 <p>Due to a historical quirk, ASCII only uses 7 bits for its 128 codepoints.
 ASCII was invented for telegraphs, and 7 bits were 14% more efficient to
 transmit than an 8-bit code would have been! This conveniently falls within
-the positive range of both signed and unsigned <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> which is the whole
-reason signed <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> were even able to exist in the first place!</p>
-<p>To resolve this discrepancy, C89 added the <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code> data type, but left
-the signedness of <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> up in the air in order to maintain backwards
-compatability. For consistency, the <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code> keyword was also allowed to be
-used with the other integer types (e.g. <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></code>), although it has no
+the positive range of both signed and unsigned <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> which is the whole
+reason signed <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> were even able to exist in the first place!</p>
+<p>To resolve this discrepancy, C89 added the <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span> data type, but left
+the signedness of <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> up in the air in order to maintain backwards
+compatability. For consistency, the <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span></span> keyword was also allowed to be
+used with the other integer types (e.g. <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span>), although it has no
 effect since they are already implicitly signed. The standards require that
-<code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> have the same representation and size as either <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> or
-<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code>, but all three remain distinct types.</p>
-<p>In reality, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code> is rarely used since it’s just a regular integer
-with a practically useless range. On the other hand, <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> and <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span>
-<span class="kt">char</span></code> continue to be widely used as they always have, for characters and
-bytes. Thus, one could argue, the <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code> keyword really wasn’t necessary
+<span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> have the same representation and size as either <span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span> or
+<span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span>, but all three remain distinct types.</p>
+<p>In reality, <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span> is rarely used since it’s just a regular integer
+with a practically useless range. On the other hand, <span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span> and <span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span> continue to be widely used as they always have, for characters and
+bytes. Thus, one could argue, the <span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span></span> keyword really wasn’t necessary
 at all!</p>
 </div>
 </section>
 <section id="bool">
 <h3>_Bool<a class="headerlink" href="#bool" title="Permalink to this heading"></a></h3>
-<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">_Bool</span></code> type is a special unsigned integer type can hold values of 0 or 1.
+<p>The <span class="c-texpr sig sig-inline highlight c"><span class="kt">_Bool</span></span> type is a special unsigned integer type can hold values of 0 or 1.
 The special header <code class="file docutils literal notranslate"><span class="pre">&lt;stdbool.h&gt;</span></code> defines friendly macros such as the alternative
-name <code class="code highlight c docutils literal highlight-c"><span class="kt">bool</span></code> as well as the values <code class="code highlight c docutils literal highlight-c"><span class="nb">true</span></code> (1), and <code class="code highlight c docutils literal highlight-c"><span class="nb">false</span></code> (0) for using this
+name <span class="c-texpr sig sig-inline highlight c"><span class="kt">bool</span></span> as well as the values <span class="c-texpr sig sig-inline highlight c"><span class="k">true</span></span> (1), and <span class="c-texpr sig sig-inline highlight c"><span class="k">false</span></span> (0) for using this
 type.</p>
 </section>
 </section>
@@ -455,7 +454,7 @@ type.</p>
 cover in this class. The floating types are rarely ever used in systems programming
 since they cannot accurately represent most numbers and they are costly in terms
 of size and performance characteristics. Besides, we don’t want to concern ourselves
-with questions such as whether <code class="code highlight c docutils literal highlight-c"><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.3</span></code> is true!</p>
+with questions such as whether <span class="c-texpr sig sig-inline highlight c"><span class="m">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0.2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0.3</span></span> is true!</p>
 </section>
 <section id="derived-types">
 <h2>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this heading"></a></h2>
@@ -466,19 +465,19 @@ with questions such as whether <code class="code highlight c docutils literal hi
 </section>
 <section id="structure-types">
 <h3>Structure Types<a class="headerlink" href="#structure-types" title="Permalink to this heading"></a></h3>
-<p>A structure (<code class="code highlight c docutils literal highlight-c"><span class="k">struct</span></code>) groups types together into a single type with a consistent
+<p>A structure (<span class="c-texpr sig sig-inline highlight c">struct</span>) groups types together into a single type with a consistent
 memory layout.</p>
 </section>
 <section id="union-types">
 <h3>Union Types<a class="headerlink" href="#union-types" title="Permalink to this heading"></a></h3>
-<p>Union (<code class="code highlight c docutils literal highlight-c"><span class="k">union</span></code>) group types together, like a struct, but all of the types overlap
+<p>Union (<span class="c-texpr sig sig-inline highlight c">union</span>) group types together, like a struct, but all of the types overlap
 so that only one may be used at a time. These have very clever uses that are not obvious
 at first glance!</p>
 </section>
 <section id="function-types">
 <h3>Function Types<a class="headerlink" href="#function-types" title="Permalink to this heading"></a></h3>
 <p>Functions represent a callable unit of code which accepts parameters and
-returns a value of a particular type, or none (<code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> function). Like objects,
+returns a value of a particular type, or none (<span class="c-texpr sig sig-inline highlight c"><span class="kt">void</span></span> function). Like objects,
 functions have an address</p>
 </section>
 <section id="pointer-types">
@@ -490,20 +489,20 @@ directly.</p>
 </section>
 <section id="type-defines">
 <h2>Type defines<a class="headerlink" href="#type-defines" title="Permalink to this heading"></a></h2>
-<p>Additional type aliases may be introduced through a type definition (<code class="code highlight c docutils literal highlight-c"><span class="k">typedef</span></code>)
+<p>Additional type aliases may be introduced through a type definition (<span class="c-texpr sig sig-inline highlight c">typedef</span>)
 mechanism. This allows an implementation to choose an underlying type based on
 need, and abstract away that decision, in order to write code that is more
 portable. This is the source of many additional type aliases we will come
-across later on, such as <code class="code highlight c docutils literal highlight-c"><span class="kt">size_t</span></code>.</p>
+across later on, such as <span class="c-texpr sig sig-inline highlight c"><span class="n">size_t</span></span>.</p>
 </section>
 <section id="additional-type-categories">
 <h2>Additional Type Categories<a class="headerlink" href="#additional-type-categories" title="Permalink to this heading"></a></h2>
 <p>The types mentioned above are grouped into several additional categories:</p>
 <dl class="simple glossary">
 <dt id="term-Character-Types">Character Types<a class="headerlink" href="#term-Character-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code></p></li>
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span></p></li>
 </ul>
 </dd>
 <dt id="term-Integer-Types">Integer Types<a class="headerlink" href="#term-Integer-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
@@ -519,7 +518,7 @@ across later on, such as <code class="code highlight c docutils literal highligh
 </ul>
 </dd>
 <dt id="term-Basic-Types">Basic Types<a class="headerlink" href="#term-Basic-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
-<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></li>
+<li><p><span class="c-texpr sig sig-inline highlight c"><span class="kt">char</span></span></p></li>
 <li><p><a class="reference internal" href="#term-Integer-Types"><span class="xref std std-term">Integer Types</span></a></p></li>
 <li><p><a class="reference internal" href="#term-Floating-Types"><span class="xref std std-term">Floating Types</span></a></p></li>
 </ul>

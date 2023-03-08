@@ -112,18 +112,18 @@ case of allocated objects).</p>
 <section id="size">
 <h2>Size<a class="headerlink" href="#size" title="Permalink to this heading"></a></h2>
 <p>Objects consist of contiguously addressable sequences of one or more bytes. The
-<code class="code highlight c docutils literal highlight-c"><span class="k">sizeof</span></code> operator can be used to determine the size of an object.</p>
+<span class="c-texpr sig sig-inline highlight c">sizeof</span> operator can be used to determine the size of an object.</p>
 </section>
 <section id="object-representation">
 <h2>Object Representation<a class="headerlink" href="#object-representation" title="Permalink to this heading"></a></h2>
-<p>Any object may be accessed as an array of bytes (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></code>, where <code class="code highlight c docutils literal highlight-c"><span class="n">n</span></code> is
+<p>Any object may be accessed as an array of bytes (<span class="c-texpr sig sig-inline highlight c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></span>, where <span class="c-texpr sig sig-inline highlight c"><span class="n">n</span></span> is
 the size of the object) which is called its <em>object representation</em>.</p>
 </section>
 <section id="value">
 <h2>Value<a class="headerlink" href="#value" title="Permalink to this heading"></a></h2>
 <p>An object’s value is determined by a combination of its object representation
 and type. Values with the same object representation <em>always</em> compare equal
-(except for the special floating-point value, <code class="code highlight c docutils literal highlight-c"><span class="n">NAN</span></code> which represents “Not a
+(except for the special floating-point value, <span class="c-texpr sig sig-inline highlight c"><span class="n">NAN</span></span> which represents “Not a
 Number”). The converse does not hold, because there may be multiple valid
 ways to represent the same value for a given type.</p>
 </section>
@@ -150,7 +150,7 @@ deallocation.</p>
 <section id="address">
 <h2>Address<a class="headerlink" href="#address" title="Permalink to this heading"></a></h2>
 <p>All objects have an integer address, except for objects that are explicitly
-declared using the <code class="code highlight c docutils literal highlight-c"><span class="k">register</span></code> keyword. Two objects of the same type with the
+declared using the <span class="c-texpr sig sig-inline highlight c">register</span> keyword. Two objects of the same type with the
 same address are the same object.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
