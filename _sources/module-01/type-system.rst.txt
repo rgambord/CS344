@@ -1,0 +1,463 @@
+=================
+C Type System
+=================
+
+C is a *statically typed* language, which means every object and function has a
+specific type known at compile-time. The type of an object or function can not
+change. There are three main classes of types: object, function, and
+incomplete. As its name suggests, an object type include the size and alignment
+information necessary to construct an object of that type. Likewise, function
+types describe functions, which we will discuss separately. An incomplete type
+describes an object, but lacks size and/or alignment information necessary to
+construct an object of that type.
+
+The C type-system consists of the following types, with any aliases shown in
+parentheses. Typenames and their aliases consisting of multiple words may be
+written with those words in any order (e.g. `long int` and `int long` are the same type).
+
+Special Types
+  * `void`
+  * `char`
+  * Enumeration Types
+
+.. glossary::
+  Signed Integer Types
+    * `signed char`
+    * `short` (`signed short`, `short int`, `signed short int`)
+    * `int` (`signed`, `signed int`)
+    * `long` (`signed long`, `long int`, `signed long int`)
+    * `long long` (`signed long long`, `long long int`, `signed long long int`)
+
+  Unsigned Integer Types
+    * `_Bool`
+    * `unsigned char`
+    * `unsigned short` (`unsigned short int`)
+    * `unsigned int` (`unsigned`)
+    * `unsigned long` (`unsigned long int`)
+    * `unsigned long long` (`unsigned long long int`)
+
+  Real Floating Types
+    * `float`
+    * `double`
+    * `long double`
+
+  Complex Types
+    * `float _Complex`
+    * `double _Complex`
+    * `long double _Complex`
+    
+  Derived Types
+    * Array Types
+    * Structure Types
+    * Union Types 
+    * Function Types
+    * Pointer Types
+
+Special Types
+=============
+
+These types are used for special purposes.
+
+void
+----
+
+The `void` type is used to indicate the absence of type where it would it
+would normally be syntactically required. By definition, `void` is an
+incomplete type that *cannot be completed*, so it is impossible to create,
+inspect, or manipulate an object of type `void`. Nevertheless, it has three
+important uses:
+
+
+* A function declared as returning `void` does not return anything (The
+  technical term is *procedure*)
+* A function declared with `void` as its parameter list has no parameters
+  (The technical term is *nullary*)
+* A pointer to `void` (i.e. `void *`) is a universal pointer which can point to
+  an object of any type. Pointers to a particular type may be freely converted
+  to pointers to void and back again without loss of information; this is often
+  used to implement parametric polymorphism (generic programming).
+
+char
+----
+
+A `char` (pronounced /t͡ʃɑɹ/, as in "*char*coal") is the smallest and most
+fundamental data type, defined to have a size of 1 (i.e. `sizeof (char) == 1`)
+and is synonymous with *byte*. The `char` type is used for representing
+ASCII-encoded characters, which is the basis for its name. The macro,
+`CHAR_BIT`, is defined by the implementation as the number of bits in a `char`
+and must be at least 8.
+
+.. warning::
+   While the size of a byte on many modern systems is 8 bits, many embedded and
+   specialty environments have a larger intrinsic byte size. You must check
+   `CHAR_BIT` when your code depends on its value!
+
+Enumeration Types
+-----------------
+
+An enumeration (`enum`) maps a list of identifiers to constant integer values,
+and is commonly used to assign a group of related identifiers with mutually
+unique values when the value of each is otherwise arbitrary. For example, an
+enumeration might assign an arbitrary integer value to each of a list of color
+names. The implementation chooses a signed or unsigned integer type for each
+enumeration that is large enough to hold all of its possible values.
+
+
+Integer Types
+=============
+
+C includes several integer types each with a successively larger range of
+values. For each signed integer type, there is correponding (but different)
+unsigned integer type. 
+
+Working at a low level, it's important to really understand what an integer
+actually is and the rules for working with them in C. The rules for these types
+are somewhat complex to account for the wide variety of systems where C is
+implemented, but can be summarized as follows:
+
+Representation
+--------------
+
+Every integer type consists of bits, each of which is classified as one of:
+
+.. glossary::
+   Value bit
+     Value bits are assigned successive powers of 2 (i.e. :math:`2^0, 2^1, 2^2,
+     ...`) and contribute to the integer's value. The order of value bits is
+     unspecified (intended to account for `endianness
+     <https://en.wiktionary.org/wiki/endianness>`_).
+
+   Padding bit
+     Padding bits do not contribute to the value of an integer. Two integers may compare
+     equal while having different padding bit values.
+
+     .. note::
+       Integers typically are implemented without padding bits, but their uses
+       include:
+
+       * Parity bits for data consistency checking
+       * Implementation of an unsigned type by simply ignoring the sign bit of the
+         signed equivalent.
+
+   Sign bit
+     Signed integers have exactly one sign bit, while unsigned integers have none. Signed
+     integers must be represented using one of the following schemes, where :math:`N` is the
+     number of sign bits:
+
+     .. list-table:: 
+       :header-rows: 1
+       :stub-columns: 1
+
+       * - Scheme
+         - Sign Bit Value
+         - Minimum Value
+         - Maximum Value
+       * - Sign and Magnitude
+         - Negates Value Bits
+         - :math:`-2^N + 1`
+         - :math:`2^N - 1`
+       * - One's Complement
+         - :math:`-2^N - 1`
+         - :math:`-2^N + 1`
+         - :math:`2^N - 1`
+       * - Two's Complement
+         - :math:`-2^N`
+         - :math:`-2^N`
+         - :math:`2^N - 1`
+
+     Positive signed values are required to have the exact same representation as
+     the same value in the corresponding unsigned type (this implies that the range
+     of positive signed values is a subset of the range of unsigned values of
+     corresponding type).
+
+.. admonition:: Technical Jargon
+   :class: important
+
+   .. glossary::
+     precision
+         The number of value bits in an integer.
+
+     width
+         The number of value bits, plus any sign bit, in an integer.
+
+
+Minimum Range and Size
+----------------------
+
+Every integer type has a defined minimum range of values, which implies a
+minimum width/precision. These minimums correspond to traditional x86-64
+register sizes:
+
+.. list-table::
+   :align: center
+   :header-rows: 1
+
+   * - Type
+     - Corresponding Register
+     - Size (bits)
+     - Signed Range
+     - Unsigned Max
+   * - `char`
+     - :asm:`al` and :asm:`ah`
+     - 8
+     - :math:`\pm 2^7 - 1`
+     - :math:`2^8 - 1`
+   * - `short`
+     - :asm:`ax`
+     - 16
+     - :math:`\pm 2^{15} - 1`
+     - :math:`2^16 - 1`
+   * - `long`
+     - :asm:`eax`
+     - 32
+     - :math:`\pm 2^{31} - 1`
+     - :math:`2^32 - 1`
+   * - `long long`
+     - :asm:`rax`
+     - 64
+     - :math:`\pm 2^{63} - 1`
+     - :math:`2^64 - 1`
+
+
+
+.. note::
+   The actual implemented size of each type depends on the chosen *data model*,
+   which defines the size of each of these types along with the size of a
+   pointer (memory address) of a particular system. The two most common x86-64
+   data models are LLP64 (Windows) and LP64 (Unix) are almost equivalent:
+
+   .. list-table::
+      :align: center
+      :header-rows: 1
+      :stub-columns: 1
+
+      * - Data Model 
+        - short 
+        - int 
+        - long 
+        - long long 
+        - Pointer Size 
+        - Environment      
+      * - LLP64      
+        - 16    
+        - 32  
+        - 32   
+        - 64        
+        - 64           
+        - Windows
+      * - LP64       
+        - 16    
+        - 32  
+        - 64   
+        - 64        
+        - 64           
+        - Unix
+
+
+..
+  Integer Overflow
+  ----------------
+
+  Assigning values outside the range of a signed integer (integer overflow) is
+  implementation-defined behavior. For unsigned integers, the value is converted
+  modulo the maximum value of the unsigned type.
+
+  .. warning:: 
+    Be careful when assigning values to signed integers. Many systems implement
+    signed integers with two's complemenet, and define the conversion between
+    signed and unsigned as simply reinterpreting the sign bit as the most
+    significant bit and vice versa.
+
+    However, this implementation-defined behavior should not be relied on. Other
+    common implementation-defined behaviors include:
+    
+    Clamping Arithmetic
+      Values outside the range are rounded to the maximum or minimum value that
+      integer can hold.
+
+    Truncation
+      The value is simply truncated to a width that fits within the data type. The
+      stored result is corrupted.
+
+    Raising a Signal
+      Some implementations will raise a signal and abort the program if signed overflow
+      is attempted.
+
+
+Ranking
+-------
+
+The precision of each type can be larger than the minimum specified, but the following
+ranking of precision must be observed by the implementation, so that each type can
+represent any value of a type that it outranks:
+
+`signed char` ≤ `short` ≤ `int` ≤ `long` ≤ `long long`
+
+Special Integer Types
+=====================
+
+The following integer types have special properties that set them apart
+from the other integer types.
+
+int
+---
+
+The `int` data type (pronounced /ɪnt/, a contraction of "integer") is a special
+type that is designated as the optimal type for arithmetic and logical
+operations because it is implemented as the native word size of the processor's
+registers. Compilers often also include special optimizations to make typical uses
+of `int` even faster than other data types. The minimum range/size of `int` is
+equivalent to that of `short`.
+
+unsigned char
+-------------
+
+The `unsigned char` data type is special in that it cannot have padding bits
+and it is required to use pure binary represenation (bit 0 represents :math:`2^0`,
+bit 1 represents :math:`2^1`, and so on). Thus, `unsigned char` is used to represent
+and manipulate raw binary data. Any object can be copied into an object of type
+`unsigned char[n]`, where `n` is the size of the object in
+bytes, which is called its *object representation*.
+
+
+.. note::
+   **Three char types**
+
+   Originally, there was no `signed` keyword: all integers are implicitly signed
+   unless explicitly declared `unsigned`. The one exception to this rule is the
+   `char` data type. Some compilers followed the rule for other integers and
+   implemented `char` as a signed type, with the `unsigned char` counterpart.
+   Others, however, implemented `char` as unsigned, and thus there was no signed
+   version available at all!
+ 
+   This may seem odd, but it actually makes a lot of sense. The `char` type has
+   always been used for representing text characters. Character encoding works
+   by enumerating all the characters in a given set with positive values called
+   their codepoints, so using a signed `char` just wastes half of the available
+   range on negative numbers that are never used.
+ 
+   Due to a historical quirk, ASCII only uses 7 bits for its 128 codepoints.
+   ASCII was invented for telegraphs, and 7 bits were 14% more efficient to
+   transmit than an 8-bit code would have been! This conveniently falls within
+   the positive range of both signed and unsigned `char` which is the whole
+   reason signed `char` were even able to exist in the first place!
+ 
+   To resolve this discrepancy, C89 added the `signed char` data type, but left
+   the signedness of `char` up in the air in order to maintain backwards
+   compatability. For consistency, the `signed` keyword was also allowed to be
+   used with the other integer types (e.g. `signed int`), although it has no
+   effect since they are already implicitly signed. The standards require that
+   `char` have the same representation and size as either `unsigned char` or
+   `signed char`, but all three remain distinct types.
+ 
+   In reality, `signed char` is rarely used since it's just a regular integer
+   with a practically useless range. On the other hand, `char` and `unsigned
+   char` continue to be widely used as they always have, for characters and
+   bytes. Thus, one could argue, the `signed` keyword really wasn't necessary
+   at all!
+   
+_Bool
+-----
+
+The `_Bool` type is a special unsigned integer type can hold values of 0 or 1.
+The special header :file:`<stdbool.h>` defines friendly macros such as the alternative
+name `bool` as well as the values `true` (1), and `false` (0) for using this
+type. 
+
+Floating Types
+==============
+
+Floating point arithmetic is a topic all on its own, and not something we will
+cover in this class. The floating types are rarely ever used in systems programming
+since they cannot accurately represent most numbers and they are costly in terms
+of size and performance characteristics. Besides, we don't want to concern ourselves
+with questions such as whether `0.1 + 0.2 == 0.3` is true!
+
+
+Derived Types
+=============
+
+We will discuss these in more detail when we study the syntax of declarations.
+
+Array Types
+-----------
+
+An array is a contiguous sequence of objects of a particular type.
+
+Structure Types
+---------------
+
+A structure (`struct`) groups types together into a single type with a consistent
+memory layout.
+
+Union Types
+-----------
+
+Union (`union`) group types together, like a struct, but all of the types overlap
+so that only one may be used at a time. These have very clever uses that are not obvious
+at first glance!
+
+Function Types
+--------------
+
+Functions represent a callable unit of code which accepts parameters and
+returns a value of a particular type, or none (`void` function). Like objects,
+functions have an address
+
+Pointer Types
+-------------
+
+Pointers hold a reference (the address of) an object or function of the type from
+which they are derived. Pointers may be dereferenced to access the pointed-at object
+directly.
+
+Type defines
+============
+
+Additional type aliases may be introduced through a type definition (`typedef`)
+mechanism. This allows an implementation to choose an underlying type based on
+need, and abstract away that decision, in order to write code that is more
+portable. This is the source of many additional type aliases we will come
+across later on, such as `size_t`.
+
+Additional Type Categories
+==========================
+
+The types mentioned above are grouped into several additional categories:
+
+.. glossary::
+   Character Types
+    * `char`
+    * `signed char`
+    * `unsigned char`
+
+   Integer Types
+    * :term:`Signed Integer Types`
+    * :term:`Unsigned Integer Types`
+    * :term:`Character Types`
+    * Enumeration Types
+   
+   Floating Types
+    * :term:`Real Floating Types`
+    * :term:`Complex Types`
+
+   Basic Types
+    * `char`
+    * :term:`Integer Types`
+    * :term:`Floating Types`
+
+   Real Types
+    * :term:`Integer Types`
+    * :term:`Real Floating Types`
+
+   Arithmetic Types
+    * :term:`Integer Types`
+    * :term:`Floating Types`
+       
+   Scalar Types
+    * :term:`Arithmetic Types`
+    * Pointer Types
+
+   Aggregate Types
+    * Array Types
+    * Structure Types

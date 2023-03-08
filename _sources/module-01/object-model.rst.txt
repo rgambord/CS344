@@ -1,0 +1,80 @@
+==================
+C Object Model
+==================
+
+.. index::
+   single: object
+   pair: effective type; object
+   pair: size; object
+   pair: object representation; object
+   pair: value; object
+   pair: alignment; object
+   pair: storage duration; object
+   pair: lifetime; object
+
+An object is a region of data storage which can be interpreted as having a
+specific value depending on its type. C programs create, access, modify, and
+destroy objects. Every object has several properties:
+
+Effective Type
+==============
+
+An object's type determines what kind of data it holds, its size,
+representation, and alignnment. The type of an object may either be
+explicit (in the case of a declaration), or implied by use (in the
+case of allocated objects).
+
+Size
+====
+
+Objects consist of contiguously addressable sequences of one or more bytes. The
+`sizeof` operator can be used to determine the size of an object.
+
+Object Representation
+=====================
+
+Any object may be accessed as an array of bytes (`unsigned char[n]`, where `n` is
+the size of the object) which is called its *object representation*.
+
+Value
+=====
+
+An object's value is determined by a combination of its object representation
+and type. Values with the same object representation *always* compare equal
+(except for the special floating-point value, `NAN` which represents "Not a
+Number"). The converse does not hold, because there may be multiple valid
+ways to represent the same value for a given type.
+
+Alignment
+=========
+
+An object's alignment requirement is the number of bytes between adjacent
+objects of that type. Aggregations of a types must satisfy the alignment
+requirement by adding additional padding between elements.
+
+Storage Duration and Lifetime
+=============================
+
+Objects have a storage duration, which determines their lifetime (how long they exist for).
+An object's storage duration is either:
+
+Static
+  The object exists for the duration of the program.
+Automatic 
+  The object exists while its identifier is in scope.
+Allocated
+  The object exists from the moment of explicit allocation until explicit
+  deallocation.
+
+Address
+=======
+
+All objects have an integer address, except for objects that are explicitly
+declared using the `register` keyword. Two objects of the same type with the
+same address are the same object.
+
+.. note:: 
+   Technically, objects of different types can occupy separate address
+   spaces, which is actually a property of some archictures. Therefore two
+   distinct objects could have the same address, but different type.
+  

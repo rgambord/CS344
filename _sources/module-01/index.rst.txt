@@ -1,0 +1,51 @@
+=======================
+Module 1
+=======================
+
+-----------------------
+Introduction to C
+-----------------------
+
+Welcome to the first module, where we will introduce ourselves to the C
+programming language! In this module, we will explore the basics of C and
+introduces ourselves to the basic concepts and tools required to write,
+compile, link, and execute C programs. We will cover the C abstract machine
+model, basic syntax and semantic elements, fundamental and derived data types,
+control structures and functions, and the basic I/O facilities of the C
+standard library. By the end of this module, you will be able to understand
+and write basic C programs. 
+
+Explorations
+=======================
+
+.. toctree::
+   :maxdepth: 1
+
+   basic-concepts
+   object-model
+   type-system
+   identifiers
+   declarations
+
+Module Learning Outcomes
+========================
+
+After successful completion of this module, you will
+
+
+#. Understand and explain the following basic features of the C language:
+
+   * Stages of translation
+   * Abstract object and machine models
+   * Libraries, linkage, and the purpose and function of header files
+   * Statements and control structures
+   * Expressions and basic operations
+   * Declaration of identifiers and initialization of objects
+   * Function definitions and call semantics
+   * Implicit and explicit type conversion
+
+#. Write simple C programs that perform calculations, manipulate text, and read
+   and write files using only C language and standard library features.
+#. Apply basic debugging techniques to find and solve common compile-time and
+   run-time issues.
+

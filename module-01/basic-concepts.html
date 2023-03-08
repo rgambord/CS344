@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Concepts &mdash; CS 344 - Operating Systems  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/brand.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="C Object Model" href="object-model.html" />
+    <link rel="prev" title="Module 1" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #D73F09" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CS 344 - Operating Systems
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module 1</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#introduction-to-c">Introduction to C</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#explorations">Explorations</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Basic Concepts</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#the-c-abstract-machine-model">The C Abstract Machine Model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#translation">Translation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#defined-and-undefined-behavior">Defined and Undefined Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="object-model.html">C Object Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="type-system.html">C Type System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="identifiers.html">Identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="declarations.html">Declaration &amp; Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#module-learning-outcomes">Module Learning Outcomes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #D73F09" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS 344 - Operating Systems</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module 1</a></li>
+      <li class="breadcrumb-item active">Basic Concepts</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="Module 1" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="object-model.html" class="btn btn-neutral float-right" title="C Object Model" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basic-concepts">
+<h1>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The C Language Standard comprises two major components: the language
+specification and the C standard library. The language specification defines
+the fundamental features of C, including the abstract model, compilation and
+execution environment, and basic syntactical and semantic elements. On the
+other hand, the library specification defines a set of basic input/output (I/O)
+and utility functions that can be used to build more complex programs than
+those achievable with the language alone. These library functions provide a
+standardized low-level interface that promotes language portability between
+different envrionments, abstracting away the specific library implementation
+details, which are often written in assembly. To start, we will focus on the
+narrow scope of the language itself. Along the way, we will briefly introduce a
+few common standard library functions to use as examples in explaining certain
+language features. Later, we will take a more comprehensive look at the
+standard library and the features it provides.</p>
+</section>
+<section id="the-c-abstract-machine-model">
+<span id="index-0"></span><h2>The C Abstract Machine Model<a class="headerlink" href="#the-c-abstract-machine-model" title="Permalink to this heading"></a></h2>
+<p>The C abstract model is a conceptual model that describes how a C program is
+executed. It consists of a set of rules and assumptions that define the
+behavior of C programs without specifying how they should be implemented on a
+particular computer or operating system. The abstract model assumes the
+presence of a memory model that represents the program’s memory as sequence(s)
+of bytes that can be read from and written to, as well as a set of primitive
+and derived data types along with a set of fundamental operations that can be
+performed on them. These data types are represented as abstract objects, which
+have specific properties that we will discuss below.</p>
+<p>The abstract model also defines the order of execution of statements and the
+way that functions are called and return values are passed. It specifies the
+behavior of control structures such as loops and conditionals, and how they
+affect program execution. Finally, the abstract model defines the rules for
+program termination and error handling. Overall, the C abstract model provides
+a high-level view of how C programs are executed and serves as a foundation for
+understanding the language and its behavior on different platforms.</p>
+</section>
+<section id="translation">
+<span id="index-1"></span><h2>Translation<a class="headerlink" href="#translation" title="Permalink to this heading"></a></h2>
+<p>To understand the C programming language, it’s important to understand the
+translation process, which converts source code into an executable object. The
+process consists of eight phases, starting with a C source file and all its
+associated header and source files, collectively called a <em>preprocessing
+translation unit</em>.</p>
+<dl class="simple">
+<dt>Preprocessing</dt><dd><p>The first six phases involve various text-processing steps that operate on
+the preprocessing translation unit in a purely syntactic manner, such as
+replacing comments with spaces, concatenating adjacent string literals, and
+performing pre-processor macro expansions. These steps are handled by a
+separate program called the <em>C preprocessor</em> (<strong class="command">cpp</strong>). The output of
+these steps is called the <em>translation unit</em>.</p>
+</dd>
+<dt>Compilation</dt><dd><p>In the seventh phase, the syntactic tokens of the translation unit are
+reinterpreted semantically, and compilation takes place, producing a <em>compiled
+translation unit</em>. The standalone program which performs this task is the C
+compiler (<strong class="command">c99</strong>), and its output is native machine bytecode, which is
+also known as <em>object code</em>.</p>
+</dd>
+<dt>Linking</dt><dd><p>In the final phase, compiled translation units and library components needed to
+satisfy external references are collected to form a <em>program image</em> that contains
+all the information needed for execution in its execution environment. In other
+words, an executable or loadable program.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In casual conversation, programmers often refer to the entire translation
+process simply as <em>compilation</em>, as it is the most significant step of the
+process, but it’s very important to keep in mind that preprocessing,
+compilation, and linking are three very distinct stages and we often are
+motivated to perform only certain stages to achieve different development
+purposes. When in doubt, use the more precise terminology.</p>
+</div>
+</section>
+<section id="defined-and-undefined-behavior">
+<span id="index-2"></span><h2>Defined and Undefined Behavior<a class="headerlink" href="#defined-and-undefined-behavior" title="Permalink to this heading"></a></h2>
+<p>One hallmark of the C language is undefined behavior. Memory accesses outside
+the bounds of an object, signed integer overflow, and various other actions
+invoke undefined behavior, and there are no restrictions on how the program
+might respond. This can be a source of frustration, as bugs can be difficult to
+track down, appearing and disappearing under different test circumstances.</p>
+<p>Unlike other very high level languages, like python, the C compiler assumes
+that you know what you are doing, and will often happily compile code as long
+as it is syntactically correct, even if it violates the C standards or invokes
+undefined behavior. Because the compiler can assume undefined behavior never
+happens, it can make a lot of optimizations that otherwise would not be
+possible.</p>
+<p>The broad scope of undefined behavior also makes it easier to implement a C
+compiler because the implementation can ignore many edge cases. This is the
+major reason why the C language became so widely adopted, because it was very
+easy to port a C compiler to a different architecture, at a time when many
+competing and incompatible architectures existed. It was the C language that
+popularized the concept of portable code; before C, code written for one
+machine had to be laboriously ported by hand to the domain-specific language
+used by the target machine.</p>
+<dl class="simple">
+<dt>Undefined Behavior</dt><dd><p>Valid C source code cannot implement undefined behavior. If it does so, the
+compiler may literally do anything. This is famously referred to as <a class="reference external" href="https://en.wiktionary.org/wiki/nasal_demon">nasal
+demons</a>.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Unspecified Behavior</dt><dd><p>The allowed behavior of the program is restricted to among several options,
+which the implementation may choose from, without documenting its choice.
+There is no requirement that this be a consistent choice even within the
+same program.</p>
+</dd>
+<dt>Implementation-defined Behavior</dt><dd><p>The implementation may choose a behavior freely (or subject to restrictions),
+but the choice must be documented.</p>
+</dd>
+<dt>Locale-Specific Behavior</dt><dd><p>The actual behavior of the program depends on the environment’s locale
+during execution. Many of the string and character manipulation and
+inspection features of the standard library account for locale settings.</p>
+</dd>
+</dl>
+<table class="docutils align-center" id="id1">
+<caption><span class="caption-text">Behavior Types</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head stub"></th>
+<th class="head"><p>Defined</p></th>
+<th class="head"><p>Consistent</p></th>
+<th class="head"><p>Documented</p></th>
+<th class="head"><p>Portable</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>Undefined</p></th>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Unspecified</p></th>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Implementation-defined</p></th>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>Locale-Specific</p></th>
+<td><p>Yes</p></td>
+<td><p>Locale-dependent</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Module 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="object-model.html" class="btn btn-neutral float-right" title="C Object Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Type System &mdash; CS 344 - Operating Systems  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/brand.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Identifiers" href="identifiers.html" />
+    <link rel="prev" title="C Object Model" href="object-model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #D73F09" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CS 344 - Operating Systems
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module 1</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#introduction-to-c">Introduction to C</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#explorations">Explorations</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="object-model.html">C Object Model</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">C Type System</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#special-types">Special Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#void">void</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#char">char</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#enumeration-types">Enumeration Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#integer-types">Integer Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#representation">Representation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#minimum-range-and-size">Minimum Range and Size</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#ranking">Ranking</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#special-integer-types">Special Integer Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#int">int</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#unsigned-char">unsigned char</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#bool">_Bool</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#floating-types">Floating Types</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#derived-types">Derived Types</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#array-types">Array Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#structure-types">Structure Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#union-types">Union Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#function-types">Function Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pointer-types">Pointer Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#type-defines">Type defines</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#additional-type-categories">Additional Type Categories</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="identifiers.html">Identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="declarations.html">Declaration &amp; Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#module-learning-outcomes">Module Learning Outcomes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #D73F09" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS 344 - Operating Systems</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module 1</a></li>
+      <li class="breadcrumb-item active">C Type System</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="object-model.html" class="btn btn-neutral float-left" title="C Object Model" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="identifiers.html" class="btn btn-neutral float-right" title="Identifiers" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="c-type-system">
+<h1>C Type System<a class="headerlink" href="#c-type-system" title="Permalink to this heading"></a></h1>
+<p>C is a <em>statically typed</em> language, which means every object and function has a
+specific type known at compile-time. The type of an object or function can not
+change. There are three main classes of types: object, function, and
+incomplete. As its name suggests, an object type include the size and alignment
+information necessary to construct an object of that type. Likewise, function
+types describe functions, which we will discuss separately. An incomplete type
+describes an object, but lacks size and/or alignment information necessary to
+construct an object of that type.</p>
+<p>The C type-system consists of the following types, with any aliases shown in
+parentheses. Typenames and their aliases consisting of multiple words may be
+written with those words in any order (e.g. <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code> and <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span><span class="w"> </span><span class="kt">long</span></code> are the same type).</p>
+<dl class="simple">
+<dt>Special Types</dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></li>
+<li><p>Enumeration Types</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple glossary">
+<dt id="term-Signed-Integer-Types">Signed Integer Types<a class="headerlink" href="#term-Signed-Integer-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+</ul>
+</dd>
+<dt id="term-Unsigned-Integer-Types">Unsigned Integer Types<a class="headerlink" href="#term-Unsigned-Integer-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">_Bool</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span></code>)</p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code> (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span></code>)</p></li>
+</ul>
+</dd>
+<dt id="term-Real-Floating-Types">Real Floating Types<a class="headerlink" href="#term-Real-Floating-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">float</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">double</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span></code></p></li>
+</ul>
+</dd>
+<dt id="term-Complex-Types">Complex Types<a class="headerlink" href="#term-Complex-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">float</span><span class="w"> </span><span class="kt">_Complex</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">double</span><span class="w"> </span><span class="kt">_Complex</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="kt">_Complex</span></code></p></li>
+</ul>
+</dd>
+<dt id="term-Derived-Types">Derived Types<a class="headerlink" href="#term-Derived-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p>Array Types</p></li>
+<li><p>Structure Types</p></li>
+<li><p>Union Types</p></li>
+<li><p>Function Types</p></li>
+<li><p>Pointer Types</p></li>
+</ul>
+</dd>
+</dl>
+<section id="special-types">
+<h2>Special Types<a class="headerlink" href="#special-types" title="Permalink to this heading"></a></h2>
+<p>These types are used for special purposes.</p>
+<section id="void">
+<h3>void<a class="headerlink" href="#void" title="Permalink to this heading"></a></h3>
+<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> type is used to indicate the absence of type where it would it
+would normally be syntactically required. By definition, <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> is an
+incomplete type that <em>cannot be completed</em>, so it is impossible to create,
+inspect, or manipulate an object of type <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code>. Nevertheless, it has three
+important uses:</p>
+<ul class="simple">
+<li><p>A function declared as returning <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> does not return anything (The
+technical term is <em>procedure</em>)</p></li>
+<li><p>A function declared with <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> as its parameter list has no parameters
+(The technical term is <em>nullary</em>)</p></li>
+<li><p>A pointer to <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> (i.e. <code class="code highlight c docutils literal highlight-c"><span class="kt">void</span><span class="w"> </span><span class="o">*</span></code>) is a universal pointer which can point to
+an object of any type. Pointers to a particular type may be freely converted
+to pointers to void and back again without loss of information; this is often
+used to implement parametric polymorphism (generic programming).</p></li>
+</ul>
+</section>
+<section id="char">
+<h3>char<a class="headerlink" href="#char" title="Permalink to this heading"></a></h3>
+<p>A <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> (pronounced /t͡ʃɑɹ/, as in “<em>char*coal”) is the smallest and most
+fundamental data type, defined to have a size of 1 (i.e. `sizeof (char) == 1`)
+and is synonymous with *byte</em>. The <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> type is used for representing
+ASCII-encoded characters, which is the basis for its name. The macro,
+<code class="code highlight c docutils literal highlight-c"><span class="n">CHAR_BIT</span></code>, is defined by the implementation as the number of bits in a <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code>
+and must be at least 8.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While the size of a byte on many modern systems is 8 bits, many embedded and
+specialty environments have a larger intrinsic byte size. You must check
+<code class="code highlight c docutils literal highlight-c"><span class="n">CHAR_BIT</span></code> when your code depends on its value!</p>
+</div>
+</section>
+<section id="enumeration-types">
+<h3>Enumeration Types<a class="headerlink" href="#enumeration-types" title="Permalink to this heading"></a></h3>
+<p>An enumeration (<code class="code highlight c docutils literal highlight-c"><span class="k">enum</span></code>) maps a list of identifiers to constant integer values,
+and is commonly used to assign a group of related identifiers with mutually
+unique values when the value of each is otherwise arbitrary. For example, an
+enumeration might assign an arbitrary integer value to each of a list of color
+names. The implementation chooses a signed or unsigned integer type for each
+enumeration that is large enough to hold all of its possible values.</p>
+</section>
+</section>
+<section id="integer-types">
+<h2>Integer Types<a class="headerlink" href="#integer-types" title="Permalink to this heading"></a></h2>
+<p>C includes several integer types each with a successively larger range of
+values. For each signed integer type, there is correponding (but different)
+unsigned integer type.</p>
+<p>Working at a low level, it’s important to really understand what an integer
+actually is and the rules for working with them in C. The rules for these types
+are somewhat complex to account for the wide variety of systems where C is
+implemented, but can be summarized as follows:</p>
+<section id="representation">
+<h3>Representation<a class="headerlink" href="#representation" title="Permalink to this heading"></a></h3>
+<p>Every integer type consists of bits, each of which is classified as one of:</p>
+<dl class="glossary">
+<dt id="term-Value-bit">Value bit<a class="headerlink" href="#term-Value-bit" title="Permalink to this term"></a></dt><dd><p>Value bits are assigned successive powers of 2 (i.e. <img class="math" src="../_images/math/240fce2d22d0bf4ddbb34a16e94a6e3c0547de78.svg" alt="2^0, 2^1, 2^2,
+..."/>) and contribute to the integer’s value. The order of value bits is
+unspecified (intended to account for <a class="reference external" href="https://en.wiktionary.org/wiki/endianness">endianness</a>).</p>
+</dd>
+<dt id="term-Padding-bit">Padding bit<a class="headerlink" href="#term-Padding-bit" title="Permalink to this term"></a></dt><dd><p>Padding bits do not contribute to the value of an integer. Two integers may compare
+equal while having different padding bit values.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Integers typically are implemented without padding bits, but their uses
+include:</p>
+<ul class="simple">
+<li><p>Parity bits for data consistency checking</p></li>
+<li><p>Implementation of an unsigned type by simply ignoring the sign bit of the
+signed equivalent.</p></li>
+</ul>
+</div>
+</dd>
+<dt id="term-Sign-bit">Sign bit<a class="headerlink" href="#term-Sign-bit" title="Permalink to this term"></a></dt><dd><p>Signed integers have exactly one sign bit, while unsigned integers have none. Signed
+integers must be represented using one of the following schemes, where <img class="math" src="../_images/math/3bfb3a64189a14b2704f4610827762d5e3145114.svg" alt="N"/> is the
+number of sign bits:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head stub"><p>Scheme</p></th>
+<th class="head"><p>Sign Bit Value</p></th>
+<th class="head"><p>Minimum Value</p></th>
+<th class="head"><p>Maximum Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>Sign and Magnitude</p></th>
+<td><p>Negates Value Bits</p></td>
+<td><p><img class="math" src="../_images/math/f472782481a2318784f7f244f2e0b0bba50c0962.svg" alt="-2^N + 1"/></p></td>
+<td><p><img class="math" src="../_images/math/d1a575bb7c566c41a6e07bca3205653658d2b822.svg" alt="2^N - 1"/></p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>One’s Complement</p></th>
+<td><p><img class="math" src="../_images/math/3caec0cb9b7aa7985481d98f304914202afba737.svg" alt="-2^N - 1"/></p></td>
+<td><p><img class="math" src="../_images/math/f472782481a2318784f7f244f2e0b0bba50c0962.svg" alt="-2^N + 1"/></p></td>
+<td><p><img class="math" src="../_images/math/d1a575bb7c566c41a6e07bca3205653658d2b822.svg" alt="2^N - 1"/></p></td>
+</tr>
+<tr class="row-even"><th class="stub"><p>Two’s Complement</p></th>
+<td><p><img class="math" src="../_images/math/7d4c97cff1cff18cc035b8d403405c209da1305b.svg" alt="-2^N"/></p></td>
+<td><p><img class="math" src="../_images/math/7d4c97cff1cff18cc035b8d403405c209da1305b.svg" alt="-2^N"/></p></td>
+<td><p><img class="math" src="../_images/math/d1a575bb7c566c41a6e07bca3205653658d2b822.svg" alt="2^N - 1"/></p></td>
+</tr>
+</tbody>
+</table>
+<p>Positive signed values are required to have the exact same representation as
+the same value in the corresponding unsigned type (this implies that the range
+of positive signed values is a subset of the range of unsigned values of
+corresponding type).</p>
+</dd>
+</dl>
+<div class="important admonition">
+<p class="admonition-title">Technical Jargon</p>
+<dl class="simple glossary">
+<dt id="term-precision">precision<a class="headerlink" href="#term-precision" title="Permalink to this term"></a></dt><dd><p>The number of value bits in an integer.</p>
+</dd>
+<dt id="term-width">width<a class="headerlink" href="#term-width" title="Permalink to this term"></a></dt><dd><p>The number of value bits, plus any sign bit, in an integer.</p>
+</dd>
+</dl>
+</div>
+</section>
+<section id="minimum-range-and-size">
+<h3>Minimum Range and Size<a class="headerlink" href="#minimum-range-and-size" title="Permalink to this heading"></a></h3>
+<p>Every integer type has a defined minimum range of values, which implies a
+minimum width/precision. These minimums correspond to traditional x86-64
+register sizes:</p>
+<table class="docutils align-center">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Corresponding Register</p></th>
+<th class="head"><p>Size (bits)</p></th>
+<th class="head"><p>Signed Range</p></th>
+<th class="head"><p>Unsigned Max</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></td>
+<td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">al</span></code> and <code class="code highlight asm docutils literal highlight-asm"><span class="nf">ah</span></code></p></td>
+<td><p>8</p></td>
+<td><p><img class="math" src="../_images/math/ca916244d4ea502febd3d42c770f5af55b561a3a.svg" alt="\pm 2^7 - 1"/></p></td>
+<td><p><img class="math" src="../_images/math/002ef02ba23289ca8ffdada48ad1c6485233a167.svg" alt="2^8 - 1"/></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code></p></td>
+<td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">ax</span></code></p></td>
+<td><p>16</p></td>
+<td><p><img class="math" src="../_images/math/5e1d290ceb5bbd11522557fb769d172ccf9e69d5.svg" alt="\pm 2^{15} - 1"/></p></td>
+<td><p><img class="math" src="../_images/math/f8f8f1780480f08cc4b5c491fd8e42ace2586716.svg" alt="2^16 - 1"/></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span></code></p></td>
+<td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">eax</span></code></p></td>
+<td><p>32</p></td>
+<td><p><img class="math" src="../_images/math/5bc53c3b22b82f99f7d0c383538cf37d56a7ad1c.svg" alt="\pm 2^{31} - 1"/></p></td>
+<td><p><img class="math" src="../_images/math/afd7ac13fa0564d0affd789f5e201a4d772829d8.svg" alt="2^32 - 1"/></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code></p></td>
+<td><p><code class="code highlight asm docutils literal highlight-asm"><span class="nf">rax</span></code></p></td>
+<td><p>64</p></td>
+<td><p><img class="math" src="../_images/math/f92783a3ac676ea5c10d20ab4d68d41f937d569e.svg" alt="\pm 2^{63} - 1"/></p></td>
+<td><p><img class="math" src="../_images/math/85166ff05994e666f37276682d7059fdbd0b6da4.svg" alt="2^64 - 1"/></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The actual implemented size of each type depends on the chosen <em>data model</em>,
+which defines the size of each of these types along with the size of a
+pointer (memory address) of a particular system. The two most common x86-64
+data models are LLP64 (Windows) and LP64 (Unix) are almost equivalent:</p>
+<table class="docutils align-center">
+<thead>
+<tr class="row-odd"><th class="head stub"><p>Data Model</p></th>
+<th class="head"><p>short</p></th>
+<th class="head"><p>int</p></th>
+<th class="head"><p>long</p></th>
+<th class="head"><p>long long</p></th>
+<th class="head"><p>Pointer Size</p></th>
+<th class="head"><p>Environment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>LLP64</p></th>
+<td><p>16</p></td>
+<td><p>32</p></td>
+<td><p>32</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>Windows</p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>LP64</p></th>
+<td><p>16</p></td>
+<td><p>32</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
+<td><p>Unix</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ranking">
+<h3>Ranking<a class="headerlink" href="#ranking" title="Permalink to this heading"></a></h3>
+<p>The precision of each type can be larger than the minimum specified, but the following
+ranking of precision must be observed by the implementation, so that each type can
+represent any value of a type that it outranks:</p>
+<p><code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span></code> ≤ <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></code></p>
+</section>
+</section>
+<section id="special-integer-types">
+<h2>Special Integer Types<a class="headerlink" href="#special-integer-types" title="Permalink to this heading"></a></h2>
+<p>The following integer types have special properties that set them apart
+from the other integer types.</p>
+<section id="int">
+<h3>int<a class="headerlink" href="#int" title="Permalink to this heading"></a></h3>
+<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> data type (pronounced /ɪnt/, a contraction of “integer”) is a special
+type that is designated as the optimal type for arithmetic and logical
+operations because it is implemented as the native word size of the processor’s
+registers. Compilers often also include special optimizations to make typical uses
+of <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> even faster than other data types. The minimum range/size of <code class="code highlight c docutils literal highlight-c"><span class="kt">int</span></code> is
+equivalent to that of <code class="code highlight c docutils literal highlight-c"><span class="kt">short</span></code>.</p>
+</section>
+<section id="unsigned-char">
+<h3>unsigned char<a class="headerlink" href="#unsigned-char" title="Permalink to this heading"></a></h3>
+<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> data type is special in that it cannot have padding bits
+and it is required to use pure binary represenation (bit 0 represents <img class="math" src="../_images/math/e7d80456d2ffbf58d0961bc8c9d5583eb18b93a5.svg" alt="2^0"/>,
+bit 1 represents <img class="math" src="../_images/math/abc977599b57a5bc63b53b68ea096fcd09ef5435.svg" alt="2^1"/>, and so on). Thus, <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> is used to represent
+and manipulate raw binary data. Any object can be copied into an object of type
+<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></code>, where <code class="code highlight c docutils literal highlight-c"><span class="n">n</span></code> is the size of the object in
+bytes, which is called its <em>object representation</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Three char types</strong></p>
+<p>Originally, there was no <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code> keyword: all integers are implicitly signed
+unless explicitly declared <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span></code>. The one exception to this rule is the
+<code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> data type. Some compilers followed the rule for other integers and
+implemented <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> as a signed type, with the <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> counterpart.
+Others, however, implemented <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> as unsigned, and thus there was no signed
+version available at all!</p>
+<p>This may seem odd, but it actually makes a lot of sense. The <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> type has
+always been used for representing text characters. Character encoding works
+by enumerating all the characters in a given set with positive values called
+their codepoints, so using a signed <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> just wastes half of the available
+range on negative numbers that are never used.</p>
+<p>Due to a historical quirk, ASCII only uses 7 bits for its 128 codepoints.
+ASCII was invented for telegraphs, and 7 bits were 14% more efficient to
+transmit than an 8-bit code would have been! This conveniently falls within
+the positive range of both signed and unsigned <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> which is the whole
+reason signed <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> were even able to exist in the first place!</p>
+<p>To resolve this discrepancy, C89 added the <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code> data type, but left
+the signedness of <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> up in the air in order to maintain backwards
+compatability. For consistency, the <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code> keyword was also allowed to be
+used with the other integer types (e.g. <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></code>), although it has no
+effect since they are already implicitly signed. The standards require that
+<code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> have the same representation and size as either <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code> or
+<code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code>, but all three remain distinct types.</p>
+<p>In reality, <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code> is rarely used since it’s just a regular integer
+with a practically useless range. On the other hand, <code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code> and <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span>
+<span class="kt">char</span></code> continue to be widely used as they always have, for characters and
+bytes. Thus, one could argue, the <code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span></code> keyword really wasn’t necessary
+at all!</p>
+</div>
+</section>
+<section id="bool">
+<h3>_Bool<a class="headerlink" href="#bool" title="Permalink to this heading"></a></h3>
+<p>The <code class="code highlight c docutils literal highlight-c"><span class="kt">_Bool</span></code> type is a special unsigned integer type can hold values of 0 or 1.
+The special header <code class="file docutils literal notranslate"><span class="pre">&lt;stdbool.h&gt;</span></code> defines friendly macros such as the alternative
+name <code class="code highlight c docutils literal highlight-c"><span class="kt">bool</span></code> as well as the values <code class="code highlight c docutils literal highlight-c"><span class="nb">true</span></code> (1), and <code class="code highlight c docutils literal highlight-c"><span class="nb">false</span></code> (0) for using this
+type.</p>
+</section>
+</section>
+<section id="floating-types">
+<h2>Floating Types<a class="headerlink" href="#floating-types" title="Permalink to this heading"></a></h2>
+<p>Floating point arithmetic is a topic all on its own, and not something we will
+cover in this class. The floating types are rarely ever used in systems programming
+since they cannot accurately represent most numbers and they are costly in terms
+of size and performance characteristics. Besides, we don’t want to concern ourselves
+with questions such as whether <code class="code highlight c docutils literal highlight-c"><span class="mf">0.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0.3</span></code> is true!</p>
+</section>
+<section id="derived-types">
+<h2>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this heading"></a></h2>
+<p>We will discuss these in more detail when we study the syntax of declarations.</p>
+<section id="array-types">
+<h3>Array Types<a class="headerlink" href="#array-types" title="Permalink to this heading"></a></h3>
+<p>An array is a contiguous sequence of objects of a particular type.</p>
+</section>
+<section id="structure-types">
+<h3>Structure Types<a class="headerlink" href="#structure-types" title="Permalink to this heading"></a></h3>
+<p>A structure (<code class="code highlight c docutils literal highlight-c"><span class="k">struct</span></code>) groups types together into a single type with a consistent
+memory layout.</p>
+</section>
+<section id="union-types">
+<h3>Union Types<a class="headerlink" href="#union-types" title="Permalink to this heading"></a></h3>
+<p>Union (<code class="code highlight c docutils literal highlight-c"><span class="k">union</span></code>) group types together, like a struct, but all of the types overlap
+so that only one may be used at a time. These have very clever uses that are not obvious
+at first glance!</p>
+</section>
+<section id="function-types">
+<h3>Function Types<a class="headerlink" href="#function-types" title="Permalink to this heading"></a></h3>
+<p>Functions represent a callable unit of code which accepts parameters and
+returns a value of a particular type, or none (<code class="code highlight c docutils literal highlight-c"><span class="kt">void</span></code> function). Like objects,
+functions have an address</p>
+</section>
+<section id="pointer-types">
+<h3>Pointer Types<a class="headerlink" href="#pointer-types" title="Permalink to this heading"></a></h3>
+<p>Pointers hold a reference (the address of) an object or function of the type from
+which they are derived. Pointers may be dereferenced to access the pointed-at object
+directly.</p>
+</section>
+</section>
+<section id="type-defines">
+<h2>Type defines<a class="headerlink" href="#type-defines" title="Permalink to this heading"></a></h2>
+<p>Additional type aliases may be introduced through a type definition (<code class="code highlight c docutils literal highlight-c"><span class="k">typedef</span></code>)
+mechanism. This allows an implementation to choose an underlying type based on
+need, and abstract away that decision, in order to write code that is more
+portable. This is the source of many additional type aliases we will come
+across later on, such as <code class="code highlight c docutils literal highlight-c"><span class="kt">size_t</span></code>.</p>
+</section>
+<section id="additional-type-categories">
+<h2>Additional Type Categories<a class="headerlink" href="#additional-type-categories" title="Permalink to this heading"></a></h2>
+<p>The types mentioned above are grouped into several additional categories:</p>
+<dl class="simple glossary">
+<dt id="term-Character-Types">Character Types<a class="headerlink" href="#term-Character-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></code></p></li>
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></code></p></li>
+</ul>
+</dd>
+<dt id="term-Integer-Types">Integer Types<a class="headerlink" href="#term-Integer-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#term-Signed-Integer-Types"><span class="xref std std-term">Signed Integer Types</span></a></p></li>
+<li><p><a class="reference internal" href="#term-Unsigned-Integer-Types"><span class="xref std std-term">Unsigned Integer Types</span></a></p></li>
+<li><p><a class="reference internal" href="#term-Character-Types"><span class="xref std std-term">Character Types</span></a></p></li>
+<li><p>Enumeration Types</p></li>
+</ul>
+</dd>
+<dt id="term-Floating-Types">Floating Types<a class="headerlink" href="#term-Floating-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#term-Real-Floating-Types"><span class="xref std std-term">Real Floating Types</span></a></p></li>
+<li><p><a class="reference internal" href="#term-Complex-Types"><span class="xref std std-term">Complex Types</span></a></p></li>
+</ul>
+</dd>
+<dt id="term-Basic-Types">Basic Types<a class="headerlink" href="#term-Basic-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><code class="code highlight c docutils literal highlight-c"><span class="kt">char</span></code></p></li>
+<li><p><a class="reference internal" href="#term-Integer-Types"><span class="xref std std-term">Integer Types</span></a></p></li>
+<li><p><a class="reference internal" href="#term-Floating-Types"><span class="xref std std-term">Floating Types</span></a></p></li>
+</ul>
+</dd>
+<dt id="term-Real-Types">Real Types<a class="headerlink" href="#term-Real-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#term-Integer-Types"><span class="xref std std-term">Integer Types</span></a></p></li>
+<li><p><a class="reference internal" href="#term-Real-Floating-Types"><span class="xref std std-term">Real Floating Types</span></a></p></li>
+</ul>
+</dd>
+<dt id="term-Arithmetic-Types">Arithmetic Types<a class="headerlink" href="#term-Arithmetic-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#term-Integer-Types"><span class="xref std std-term">Integer Types</span></a></p></li>
+<li><p><a class="reference internal" href="#term-Floating-Types"><span class="xref std std-term">Floating Types</span></a></p></li>
+</ul>
+</dd>
+<dt id="term-Scalar-Types">Scalar Types<a class="headerlink" href="#term-Scalar-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#term-Arithmetic-Types"><span class="xref std std-term">Arithmetic Types</span></a></p></li>
+<li><p>Pointer Types</p></li>
+</ul>
+</dd>
+<dt id="term-Aggregate-Types">Aggregate Types<a class="headerlink" href="#term-Aggregate-Types" title="Permalink to this term"></a></dt><dd><ul class="simple">
+<li><p>Array Types</p></li>
+<li><p>Structure Types</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="object-model.html" class="btn btn-neutral float-left" title="C Object Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="identifiers.html" class="btn btn-neutral float-right" title="Identifiers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

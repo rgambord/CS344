@@ -1,0 +1,123 @@
+===========
+Identifiers
+===========
+
+Every object with automatic or static storage duration has an identifier, which
+is introduced in that object's *declaration*. Allocated objects are anonymous
+and do not have an identifier and can only be accessed through pointers.
+
+Aside from the identifiers given to named objects, identifiers can also refer
+to other things including:
+
+* functions
+* structure or union tags and their members
+* enumeration tags and their constants
+* typedef names
+* labels
+* macros and their parameters (as part of the preprocessing system)
+
+Identifiers consist of any combination of upper-and-lower-case letters, digits,
+and underscores ('_') that does not *begin* with a digit. The language defines
+several reserved identifiers, which may not be declared in a program. This
+includes all keywords listed in :external+c99:ref:`9899_6.4.1` and various other
+classes of identifiers listed in section :external+c99:ref:`9899_7.1.3` of the
+ISO/IEC 9899:1999 C standards.
+
+No two identifiers with identical names may appear in the same name space and
+scope and also refer to different things. However, special rules allow certain
+types of identifiers to be declared multiple times, if redeclarations are
+compatible with previous declaration(s), such as struct, function, and extern
+variable declarations.
+
+Name Space
+----------
+
+Every identifier belongs to a namespace. There are four name spaces of
+identifiers, and the name space used to resolve an identifier is determined by
+the context in which it appears:
+
+
+* **Label Names** &ndash; for use with ``goto`` statements.
+* **Tag Names** &ndash; for use with ``struct``\ , ``union``\ , and ``enum``.
+* **Member Names** &ndash; each structure or union has a separate name space
+  for its members.
+* **Ordinary Identifiers** &ndash; all other identifiers occupy the same name
+  space. This includes enumeration constants.
+
+Scope
+-----
+
+Identifiers have an associated scope, which is the portion of the program where
+an identifier is visible:
+
+
+* **Function Scope** &ndash; Labels have function scope, and may be referred to
+  from anywhere within the entire body of the function in which they appear. No other
+  identifiers have function scope.
+* **File Scope** &ndash; Identifiers declared outside of any block have file
+  scope which begins at the point of declaration and terminates at the end of
+  the translation unit.
+* **Block Scope** &ndash; Identifiers declared inside of a block or in a list
+  of function definition parameters have block scope that begins at the point
+  of declaration and terminates at the closing brace "}" of the associated
+  block. Identifiers have the same scope if they terminate at the same point
+  (belong to the same block). If an identifier in a nested block has the same
+  name as an identifier in an enclosing block, it hides the identifier from the
+  enclosing block while it is in scope.
+* **Function Prototype Scope** &ndash; Identifiers declared in a function
+  prototype belong to a scope that terminates at the end of the prototype
+  declarator. This exists solely to allow for a special and rarely used
+  array-style notation for function parameters, which can use back-references
+  to function parameters appearing earlier in the parameter list. e.g. ``void
+  f(size_t n, char arr[n]);``.
+
+Linkage
+-------
+
+Identifiers may have linkage, which refers to their ability to be referred to in
+other scopes:
+
+
+* **No Linkage** &ndash; Identifiers without linkage can only be referred to
+  within the scope they appear in. This applies to all function parameters and
+  block-scope identifiers that aren't explicitly declared as ``extern``.
+* **Internal Linkage** &ndash; Identifiers with internal linkage can be
+  referred to from all scopes within the translation unit. All static
+  file-scope identifiers (functions and objects) have internal linkage.
+* **External Linkage** &ndash; Externally Linked identifiers can be referred to
+  from any translation unit in the entire program. All non-static functions,
+  explicitly extern variables, and file-scope non-static variables are
+  externally linked.
+
+
+.. raw:: html
+
+   <div class="notebox">
+
+   **Global Variables**
+
+   Externally linked identifiers are often referred to as "global" variables.
+   However, C programmers also often refer to internally-linked file-scope
+   identifiers as global, as well. Pay close attention to the context this term is
+   used in, and provide or ask for clarification if the meaning is ambiguous.
+
+   </div>
+
+
+Exercises
+=========
+
+
+* Exercise instructions / question prompt. [embedded exercise]
+* Exercise instructions / question prompt. [embedded exercise]
+* Exercise instructions / question prompt. [embedded exercise]
+
+Optional Additional Resources If this topic interests you, then you might
+=========================================================================
+
+find the following optional resources useful.
+
+
+* Optional resource
+* Optional resource
+* Optional resource

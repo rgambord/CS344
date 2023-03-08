@@ -1,0 +1,16 @@
+|course number| - |course title| 
+================================
+
+|course term|
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   module-01/index
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`search`

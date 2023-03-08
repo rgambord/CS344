@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identifiers &mdash; CS 344 - Operating Systems  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/brand.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Declaration &amp; Initialization" href="declarations.html" />
+    <link rel="prev" title="C Type System" href="type-system.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #D73F09" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CS 344 - Operating Systems
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module 1</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#introduction-to-c">Introduction to C</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#explorations">Explorations</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="object-model.html">C Object Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="type-system.html">C Type System</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Identifiers</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#name-space">Name Space</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#scope">Scope</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#linkage">Linkage</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#exercises">Exercises</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#optional-additional-resources-if-this-topic-interests-you-then-you-might">Optional Additional Resources If this topic interests you, then you might</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="declarations.html">Declaration &amp; Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#module-learning-outcomes">Module Learning Outcomes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #D73F09" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS 344 - Operating Systems</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module 1</a></li>
+      <li class="breadcrumb-item active">Identifiers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="type-system.html" class="btn btn-neutral float-left" title="C Type System" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="declarations.html" class="btn btn-neutral float-right" title="Declaration &amp; Initialization" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="identifiers">
+<h1>Identifiers<a class="headerlink" href="#identifiers" title="Permalink to this heading"></a></h1>
+<p>Every object with automatic or static storage duration has an identifier, which
+is introduced in that object’s <em>declaration</em>. Allocated objects are anonymous
+and do not have an identifier and can only be accessed through pointers.</p>
+<p>Aside from the identifiers given to named objects, identifiers can also refer
+to other things including:</p>
+<ul class="simple">
+<li><p>functions</p></li>
+<li><p>structure or union tags and their members</p></li>
+<li><p>enumeration tags and their constants</p></li>
+<li><p>typedef names</p></li>
+<li><p>labels</p></li>
+<li><p>macros and their parameters (as part of the preprocessing system)</p></li>
+</ul>
+<p>Identifiers consist of any combination of upper-and-lower-case letters, digits,
+and underscores (‘_’) that does not <em>begin</em> with a digit. The language defines
+several reserved identifiers, which may not be declared in a program. This
+includes all keywords listed in <a class="reference external" href="https://rgambord.github.io/c99-doc/sections/6/4/1/index.html#id1" title="(in C99 Language Standard)"><span>6.4.1 Keywords</span></a> and various other
+classes of identifiers listed in section <a class="reference external" href="https://rgambord.github.io/c99-doc/sections/7/1/3/index.html#id1" title="(in C99 Language Standard)"><span>7.1.3 Reserved identifiers</span></a> of the
+ISO/IEC 9899:1999 C standards.</p>
+<p>No two identifiers with identical names may appear in the same name space and
+scope and also refer to different things. However, special rules allow certain
+types of identifiers to be declared multiple times, if redeclarations are
+compatible with previous declaration(s), such as struct, function, and extern
+variable declarations.</p>
+<section id="name-space">
+<h2>Name Space<a class="headerlink" href="#name-space" title="Permalink to this heading"></a></h2>
+<p>Every identifier belongs to a namespace. There are four name spaces of
+identifiers, and the name space used to resolve an identifier is determined by
+the context in which it appears:</p>
+<ul class="simple">
+<li><p><strong>Label Names</strong> &amp;ndash; for use with <code class="docutils literal notranslate"><span class="pre">goto</span></code> statements.</p></li>
+<li><p><strong>Tag Names</strong> &amp;ndash; for use with <code class="docutils literal notranslate"><span class="pre">struct</span></code>, <code class="docutils literal notranslate"><span class="pre">union</span></code>, and <code class="docutils literal notranslate"><span class="pre">enum</span></code>.</p></li>
+<li><p><strong>Member Names</strong> &amp;ndash; each structure or union has a separate name space
+for its members.</p></li>
+<li><p><strong>Ordinary Identifiers</strong> &amp;ndash; all other identifiers occupy the same name
+space. This includes enumeration constants.</p></li>
+</ul>
+</section>
+<section id="scope">
+<h2>Scope<a class="headerlink" href="#scope" title="Permalink to this heading"></a></h2>
+<p>Identifiers have an associated scope, which is the portion of the program where
+an identifier is visible:</p>
+<ul class="simple">
+<li><p><strong>Function Scope</strong> &amp;ndash; Labels have function scope, and may be referred to
+from anywhere within the entire body of the function in which they appear. No other
+identifiers have function scope.</p></li>
+<li><p><strong>File Scope</strong> &amp;ndash; Identifiers declared outside of any block have file
+scope which begins at the point of declaration and terminates at the end of
+the translation unit.</p></li>
+<li><p><strong>Block Scope</strong> &amp;ndash; Identifiers declared inside of a block or in a list
+of function definition parameters have block scope that begins at the point
+of declaration and terminates at the closing brace “}” of the associated
+block. Identifiers have the same scope if they terminate at the same point
+(belong to the same block). If an identifier in a nested block has the same
+name as an identifier in an enclosing block, it hides the identifier from the
+enclosing block while it is in scope.</p></li>
+<li><p><strong>Function Prototype Scope</strong> &amp;ndash; Identifiers declared in a function
+prototype belong to a scope that terminates at the end of the prototype
+declarator. This exists solely to allow for a special and rarely used
+array-style notation for function parameters, which can use back-references
+to function parameters appearing earlier in the parameter list. e.g. <code class="docutils literal notranslate"><span class="pre">void</span>
+<span class="pre">f(size_t</span> <span class="pre">n,</span> <span class="pre">char</span> <span class="pre">arr[n]);</span></code>.</p></li>
+</ul>
+</section>
+<section id="linkage">
+<h2>Linkage<a class="headerlink" href="#linkage" title="Permalink to this heading"></a></h2>
+<p>Identifiers may have linkage, which refers to their ability to be referred to in
+other scopes:</p>
+<ul class="simple">
+<li><p><strong>No Linkage</strong> &amp;ndash; Identifiers without linkage can only be referred to
+within the scope they appear in. This applies to all function parameters and
+block-scope identifiers that aren’t explicitly declared as <code class="docutils literal notranslate"><span class="pre">extern</span></code>.</p></li>
+<li><p><strong>Internal Linkage</strong> &amp;ndash; Identifiers with internal linkage can be
+referred to from all scopes within the translation unit. All static
+file-scope identifiers (functions and objects) have internal linkage.</p></li>
+<li><p><strong>External Linkage</strong> &amp;ndash; Externally Linked identifiers can be referred to
+from any translation unit in the entire program. All non-static functions,
+explicitly extern variables, and file-scope non-static variables are
+externally linked.</p></li>
+</ul>
+<div class="notebox">
+
+**Global Variables**
+
+Externally linked identifiers are often referred to as "global" variables.
+However, C programmers also often refer to internally-linked file-scope
+identifiers as global, as well. Pay close attention to the context this term is
+used in, and provide or ask for clarification if the meaning is ambiguous.
+
+</div><section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Exercise instructions / question prompt. [embedded exercise]</p></li>
+<li><p>Exercise instructions / question prompt. [embedded exercise]</p></li>
+<li><p>Exercise instructions / question prompt. [embedded exercise]</p></li>
+</ul>
+</section>
+<section id="optional-additional-resources-if-this-topic-interests-you-then-you-might">
+<h3>Optional Additional Resources If this topic interests you, then you might<a class="headerlink" href="#optional-additional-resources-if-this-topic-interests-you-then-you-might" title="Permalink to this heading"></a></h3>
+<p>find the following optional resources useful.</p>
+<ul class="simple">
+<li><p>Optional resource</p></li>
+<li><p>Optional resource</p></li>
+<li><p>Optional resource</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="type-system.html" class="btn btn-neutral float-left" title="C Type System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="declarations.html" class="btn btn-neutral float-right" title="Declaration &amp; Initialization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

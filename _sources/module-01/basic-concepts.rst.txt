@@ -1,0 +1,176 @@
+===============
+ Basic Concepts
+===============
+
+Introduction
+============
+
+The C Language Standard comprises two major components: the language
+specification and the C standard library. The language specification defines
+the fundamental features of C, including the abstract model, compilation and
+execution environment, and basic syntactical and semantic elements. On the
+other hand, the library specification defines a set of basic input/output (I/O)
+and utility functions that can be used to build more complex programs than
+those achievable with the language alone. These library functions provide a
+standardized low-level interface that promotes language portability between
+different envrionments, abstracting away the specific library implementation
+details, which are often written in assembly. To start, we will focus on the
+narrow scope of the language itself. Along the way, we will briefly introduce a
+few common standard library functions to use as examples in explaining certain
+language features. Later, we will take a more comprehensive look at the
+standard library and the features it provides.
+
+.. index:: abstract machine model
+
+The C Abstract Machine Model
+============================
+
+The C abstract model is a conceptual model that describes how a C program is
+executed. It consists of a set of rules and assumptions that define the
+behavior of C programs without specifying how they should be implemented on a
+particular computer or operating system. The abstract model assumes the
+presence of a memory model that represents the program's memory as sequence(s)
+of bytes that can be read from and written to, as well as a set of primitive
+and derived data types along with a set of fundamental operations that can be
+performed on them. These data types are represented as abstract objects, which
+have specific properties that we will discuss below.
+
+The abstract model also defines the order of execution of statements and the
+way that functions are called and return values are passed. It specifies the
+behavior of control structures such as loops and conditionals, and how they
+affect program execution. Finally, the abstract model defines the rules for
+program termination and error handling. Overall, the C abstract model provides
+a high-level view of how C programs are executed and serves as a foundation for
+understanding the language and its behavior on different platforms.
+
+.. index:: 
+   single: translation
+   see:  translation unit                 ;translation
+   see:  preprocessing translation unit   ;translation
+   see:  preprocessing                    ;translation
+   see:  program image                    ;translation
+   see:  compilation                      ;translation
+   see:  linking                          ;translation
+
+Translation
+====================
+
+To understand the C programming language, it's important to understand the
+translation process, which converts source code into an executable object. The
+process consists of eight phases, starting with a C source file and all its
+associated header and source files, collectively called a *preprocessing
+translation unit*. 
+
+Preprocessing
+  The first six phases involve various text-processing steps that operate on
+  the preprocessing translation unit in a purely syntactic manner, such as
+  replacing comments with spaces, concatenating adjacent string literals, and
+  performing pre-processor macro expansions. These steps are handled by a
+  separate program called the *C preprocessor* (:command:`cpp`). The output of
+  these steps is called the *translation unit*.
+
+Compilation
+  In the seventh phase, the syntactic tokens of the translation unit are
+  reinterpreted semantically, and compilation takes place, producing a *compiled
+  translation unit*. The standalone program which performs this task is the C
+  compiler (:command:`c99`), and its output is native machine bytecode, which is
+  also known as *object code*.
+
+Linking
+  In the final phase, compiled translation units and library components needed to
+  satisfy external references are collected to form a *program image* that contains
+  all the information needed for execution in its execution environment. In other
+  words, an executable or loadable program.
+
+.. note:: 
+   In casual conversation, programmers often refer to the entire translation
+   process simply as *compilation*, as it is the most significant step of the
+   process, but it's very important to keep in mind that preprocessing,
+   compilation, and linking are three very distinct stages and we often are
+   motivated to perform only certain stages to achieve different development
+   purposes. When in doubt, use the more precise terminology.
+
+.. index:: 
+   undefined behavior 
+   unspecified behavior 
+   locale-specific behavior
+   implementation-defined behavior
+
+Defined and Undefined Behavior
+==============================
+
+One hallmark of the C language is undefined behavior. Memory accesses outside
+the bounds of an object, signed integer overflow, and various other actions
+invoke undefined behavior, and there are no restrictions on how the program
+might respond. This can be a source of frustration, as bugs can be difficult to
+track down, appearing and disappearing under different test circumstances.
+
+Unlike other very high level languages, like python, the C compiler assumes
+that you know what you are doing, and will often happily compile code as long
+as it is syntactically correct, even if it violates the C standards or invokes
+undefined behavior. Because the compiler can assume undefined behavior never
+happens, it can make a lot of optimizations that otherwise would not be
+possible.
+
+The broad scope of undefined behavior also makes it easier to implement a C
+compiler because the implementation can ignore many edge cases. This is the
+major reason why the C language became so widely adopted, because it was very
+easy to port a C compiler to a different architecture, at a time when many
+competing and incompatible architectures existed. It was the C language that
+popularized the concept of portable code; before C, code written for one
+machine had to be laboriously ported by hand to the domain-specific language
+used by the target machine.
+
+Undefined Behavior
+  Valid C source code cannot implement undefined behavior. If it does so, the
+  compiler may literally do anything. This is famously referred to as `nasal
+  demons`_.
+
+.. _nasal demons: https://en.wiktionary.org/wiki/nasal_demon
+  
+Unspecified Behavior 
+   The allowed behavior of the program is restricted to among several options,
+   which the implementation may choose from, without documenting its choice.
+   There is no requirement that this be a consistent choice even within the
+   same program.
+
+Implementation-defined Behavior
+   The implementation may choose a behavior freely (or subject to restrictions),
+   but the choice must be documented.
+
+Locale-Specific Behavior
+   The actual behavior of the program depends on the environment's locale
+   during execution. Many of the string and character manipulation and
+   inspection features of the standard library account for locale settings.
+
+.. list-table:: Behavior Types
+   :header-rows: 1
+   :stub-columns: 1
+   :align: center
+
+   * -
+     - Defined
+     - Consistent
+     - Documented
+     - Portable
+   * - Undefined
+     - No
+     - No
+     - No
+     - No
+   * - Unspecified
+     - Yes
+     - No
+     - No
+     - No
+   * - Implementation-defined
+     - Yes
+     - Yes
+     - Yes
+     - No
+   * - Locale-Specific
+     - Yes
+     - Locale-dependent
+     - Yes
+     - Yes
+

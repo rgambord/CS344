@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Object Model &mdash; CS 344 - Operating Systems  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/brand.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="C Type System" href="type-system.html" />
+    <link rel="prev" title="Basic Concepts" href="basic-concepts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #D73F09" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CS 344 - Operating Systems
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module 1</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#introduction-to-c">Introduction to C</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#explorations">Explorations</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="basic-concepts.html">Basic Concepts</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">C Object Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#effective-type">Effective Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#size">Size</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#object-representation">Object Representation</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#value">Value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#alignment">Alignment</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#storage-duration-and-lifetime">Storage Duration and Lifetime</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#address">Address</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="type-system.html">C Type System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="identifiers.html">Identifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="declarations.html">Declaration &amp; Initialization</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#module-learning-outcomes">Module Learning Outcomes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #D73F09" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS 344 - Operating Systems</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module 1</a></li>
+      <li class="breadcrumb-item active">C Object Model</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="basic-concepts.html" class="btn btn-neutral float-left" title="Basic Concepts" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="type-system.html" class="btn btn-neutral float-right" title="C Type System" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="c-object-model">
+<h1>C Object Model<a class="headerlink" href="#c-object-model" title="Permalink to this heading"></a></h1>
+<p id="index-0">An object is a region of data storage which can be interpreted as having a
+specific value depending on its type. C programs create, access, modify, and
+destroy objects. Every object has several properties:</p>
+<section id="effective-type">
+<h2>Effective Type<a class="headerlink" href="#effective-type" title="Permalink to this heading"></a></h2>
+<p>An object’s type determines what kind of data it holds, its size,
+representation, and alignnment. The type of an object may either be
+explicit (in the case of a declaration), or implied by use (in the
+case of allocated objects).</p>
+</section>
+<section id="size">
+<h2>Size<a class="headerlink" href="#size" title="Permalink to this heading"></a></h2>
+<p>Objects consist of contiguously addressable sequences of one or more bytes. The
+<code class="code highlight c docutils literal highlight-c"><span class="k">sizeof</span></code> operator can be used to determine the size of an object.</p>
+</section>
+<section id="object-representation">
+<h2>Object Representation<a class="headerlink" href="#object-representation" title="Permalink to this heading"></a></h2>
+<p>Any object may be accessed as an array of bytes (<code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></code>, where <code class="code highlight c docutils literal highlight-c"><span class="n">n</span></code> is
+the size of the object) which is called its <em>object representation</em>.</p>
+</section>
+<section id="value">
+<h2>Value<a class="headerlink" href="#value" title="Permalink to this heading"></a></h2>
+<p>An object’s value is determined by a combination of its object representation
+and type. Values with the same object representation <em>always</em> compare equal
+(except for the special floating-point value, <code class="code highlight c docutils literal highlight-c"><span class="n">NAN</span></code> which represents “Not a
+Number”). The converse does not hold, because there may be multiple valid
+ways to represent the same value for a given type.</p>
+</section>
+<section id="alignment">
+<h2>Alignment<a class="headerlink" href="#alignment" title="Permalink to this heading"></a></h2>
+<p>An object’s alignment requirement is the number of bytes between adjacent
+objects of that type. Aggregations of a types must satisfy the alignment
+requirement by adding additional padding between elements.</p>
+</section>
+<section id="storage-duration-and-lifetime">
+<h2>Storage Duration and Lifetime<a class="headerlink" href="#storage-duration-and-lifetime" title="Permalink to this heading"></a></h2>
+<p>Objects have a storage duration, which determines their lifetime (how long they exist for).
+An object’s storage duration is either:</p>
+<dl class="simple">
+<dt>Static</dt><dd><p>The object exists for the duration of the program.</p>
+</dd>
+<dt>Automatic</dt><dd><p>The object exists while its identifier is in scope.</p>
+</dd>
+<dt>Allocated</dt><dd><p>The object exists from the moment of explicit allocation until explicit
+deallocation.</p>
+</dd>
+</dl>
+</section>
+<section id="address">
+<h2>Address<a class="headerlink" href="#address" title="Permalink to this heading"></a></h2>
+<p>All objects have an integer address, except for objects that are explicitly
+declared using the <code class="code highlight c docutils literal highlight-c"><span class="k">register</span></code> keyword. Two objects of the same type with the
+same address are the same object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Technically, objects of different types can occupy separate address
+spaces, which is actually a property of some archictures. Therefore two
+distinct objects could have the same address, but different type.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="basic-concepts.html" class="btn btn-neutral float-left" title="Basic Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="type-system.html" class="btn btn-neutral float-right" title="C Type System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+============================
+Declaration & Initialization
+============================
+
+Introduction
+============
+
+Now that we understand the basic object model and type system in C, let's look at how
+objects are declared and defined. A C program consists entirely of a sequence of external
+declarations and definitions. A declaration associates a type and identifier
+with an object or function.
+
+.. note:: 
+   An "External Declaration" appears outside of any enclosure, and is synonmous
+   with "file-scope". It does not mean the same thing as "External Linkage", which
+   we mentioned earlier. Externally declared identifiers may have internal or
+   external linkage depending on whether the `static` keyword is used in the
+   declaration.
+
+Declarations
+============
+
+A declaration in C introduces one or more identifiers, each with a specified
+type. 
+
+Basic Type Declarations
+-----------------------
+
+A declaration consists of two main components: the *declaration specifiers* and
+an *init-declarator list*. The declaration specifiers name a type and
+optionally qualify and modify that type. The init-declarator list is a
+comma-separated list of declarators, which optionally assign a value (called
+initialization). The declaration is terminated by a semicolon.
+
+Here is a simple example which declares two objects, ``x``\ , and ``y``\ , which are of
+type ``int``\ ::
+
+   int x, y;
+
+
+In this example, the declaration specifiers contains one type specifier: ``int``\ ;
+while the init-declarator list contains two init-declarators: ``x`` and ``y``.
+
+We can add additional terms to a declaration to qualify or modify the type and specify 
+its storage class. Here is the list of all of these keywords:
+
+
+* Type Qualifiers
+
+  * `const`
+  * `volatile`
+  * `restrict` (can only be used to qualify pointers)
+
+* Storage Class Specifiers
+
+  * `static`
+  * `extern`
+  * `register`
+  * `typedef`
+
+* Function Specifier:
+
+  * ``inline`` (can only be used to qualify functions)
+
+The ``const`` keyword qualifies the type as a constant type, which means its value cannot
+be modified. Const-qualification is used frequently in C programming to designate an object
+as read-only.
+
+The storage class specifiers ``static`` and ``extern`` can be a bit confusing because they affect
+both storage duration of objects and linkage of identifiers. 
+
+Linkage:
+
+
+* The ``static`` keyword prevents identifier(s) from having external linkage. At file-scope,
+  this hides a declaration from the global namespace. At block-scope, identifiers don't have
+  linkage, so it has no effect.
+* The ``extern`` keyword declares that the identifier(s) are externally linked *and* defined
+  elsewhere in another translation unit.
+
+Storage duration:
+
+
+* The ``static`` keyword causes any declared objects to have static storage duration. All objects
+  declared at file scope already have static storage duration (because they always have linkage),
+  so this only affects objects declared at block-scope. At block-scope, this causes the object
+  to continue to exist and retain its value, even when it is not in scope (after the block it is
+  declared in ends). This is commonly used to have functions track internal state between successive
+  calls.
+
+Some additional examples with these keywords are shown below:
+
+.. list-table::
+   :header-rows: 1
+
+   * - **declaration-specifiers**
+     - **init-declarator-list**
+   * - char
+     - c
+   * - int const
+     - x, y
+   * - static int
+     - lo, mid, hi
+   * - extern long
+     - big_counter
+
+
+Arrays
+------
+
+We can add square brackets to the right side of a declarator to produce an
+array: ``int x[10]`` declares ``x`` as an array of 10 ``int``. Additional sets of
+brackets may be added to introduce multi-dimensional arrays; ``int x[10][5]``
+declares ``x`` as an array of ``10`` arrays of 5 ``int``. In this example, ``x`` has
+type ``int[10][5]``\ , while ``x[0]`` has type ``int[5]``\ , and ``x[0][0]`` has type ``int``
+
+Notice that we read off the type of the array by working our way *outwards*
+from the identifier. ``int x[a][b]`` is an array of ``a`` arrays of ``b`` ``int``\ , not
+an array of ``b`` arrays of ``a`` ``int``\ !
+
+Pointers
+--------
+
+We can add '*' to the left side of a declarator to produce a pointer to that
+type; ``int *x`` declares ``x`` as a pointer to ``int``. Additional '*' introduce
+additional levels of indirection; ``int **x`` declares ``x`` as a pointer to a
+pointer to an ``int``. 
+
+Pointers may optionally also include cvr-qualifiers (\ ``const``\ , ``volatile``\ , and
+``restrict``\ ), which bind to the '*' to their left. For example, ``int *const x``
+declares ``x`` as a constant pointer to an ``int``. This means ``x`` cannot be
+modified to point somewhere else, but the data it points *to* is mutable.
+Similarly, ``int *const * x`` declares ``x`` as a pointer to a constant pointer to
+an ``int``\ , and so on. Keep in mind that cvr-qualifiers can appear to the left of
+any '*' in which case they are actually part of the
+**declaration-specifiers**\ , such as ``int const *x`` which declares ``x`` as a
+pointer to a constant ``int``\ , meaning ``x`` can be reassigned to point elsewhere,
+but the data pointed at by ``x`` is immutable.
+
+
+.. raw:: html
+
+   <div class="notebox">
+
+   **Where do spaces go around asterisks?**
+
+   Notice that the '\*' binds to whatever appears to its right side. This is why
+   we write `int *x` and not `int* x`. Parentheses can be used to explicitly group
+   terms of a declarator together; if we do this to show the implicit binding
+   affinities, we arrive at `int (*x)` vs `int(* x)`. As you can see, one is
+   clearly semantically incorrect. Now you are ready to dive into some juicy
+   arguments on the internet!
+
+   Writing the asterisk on the wrong side often confuses students because they
+   mistakenly believe that the asterisk applies to the type described in the
+   **declaration-specifiers**. Notice the difference between these two statements,
+   and how a novice might interpret them based on the formatting:
+
+   ```c
+   int* x, y;
+   int *x, y;
+   ```
+
+   The first line misleadingly appears to declare `x` and `y` as pointers to
+   `int`. The second line clearly declares `x` as a pointer to `int`, and `y` as a
+   simple `int`. Syntactically, both are identical, but semantically one is very
+   confusing.
+
+   We also prefer to avoid putting extra space on the right side of the asterisk.
+   This is because the asterisk does double duty as the pointer dereference
+   operator and as the mulitiplication operator. We try to mirror in our
+   declarations the appearance of the operator as used later in expressions. In
+   the example below, the second line is confusing and appears to be a typo at
+   first glance, while the third line clearly shows that the value 1 is being
+   added to the value that `y` points at:
+
+   ```c
+   int *y;
+   1 + * y;
+   1 + *y;
+   ```
+   </div>
+
+
+Functions
+---------
+
+Functions are introduced by adding parentheses to the right of the declarator,
+which may optionally contain a list of parameters, which themselves look a lot
+like declarations. For example, ``int f(int a, char b, int *xyz);`` declares a
+function ``f`` which accepts parameters ``a`` of type ``int``\ , ``b`` of type ``char``\ ,
+and ``xyz`` of type pointer to ``int``\ , and returns an ``int``.
+
+Further derived types
+---------------------
+
+Each of these derived types can be mixed and matched in surprising ways. For example,
+we could declare a as array of 20 pointers to functions taking no parameters and return a pointer
+to an array of 100 pointer to pointer to constant pointer to char:
+
+.. code-block:: c
+
+   char *const ** (* (*a[20])(void))[100];
+
+Notice that we read first to the right, then to the left of the identifier,
+moving outwards. This is called the "right-to-left" rule. Parentheses are
+sometimes needed to bind a pointer tighter than something that appears to the
+right side of the identifier. Knowing this, let's deconstruct the declaration
+shown above:
+
+.. code-block:: c
+
+   char *const ** (* (*a[20])(void))[100];
+   char *const ** (* (* /* a as an array of 20 */)(void))[100];
+   char *const ** (* (/* a as an array of 20 pointers to */)(void))[100];
+   char *const ** (* /* a as an array of 20 pointers to functions that take no parameters */)[100];
+   char *const ** (/* a as an array of 20 pointers to functions that take no parameters and return a pointer to */)[100];
+   char *const ** /* a as an array of 20 pointers to functions that take no parameters and return a pointer to an array of 100 */;
+   char *const * /* a as an array of 20 pointers to functions that take no parameters and return a pointer to an array of 100 pointers to */;
+   char *const /* a as an array of 20 pointers to functions that take no parameters and return a pointer to an array of 100 pointers to pointers to */;
+   char /* a as an array of 20 pointers to functions that take no parameters and return a pointer to an array of 100 pointers to pointers to constant pointers to */;
+   /* declare a as an array of 20 pointers to functions that take no parameters and return a pointer to an array of 100 pointers to pointers to constant pointers to char */;
+
+**Activity**
+
+Practice deducing the following
+type declarations:
+
+
+* ``unsigned char const **bytes``
+* ``int (*f)(int a, char b)``
+* ``static const int long *const a[12]``
+* ``const int *p[100]``
+* ``const int (*p)[100]``
+
+Next, visit the cdecl translator: `cdecl: C gibberish ↔
+English <https://cdecl.org/>`_ and check your work!
+
+Initialization
+==============
+
+Each declarator may also initialize the object it creates. For simple scalar
+types line ``char`` and ``int``\ , and pointers, this works exactly the same as a
+simple assignment, as we will cover later when we talk about operators, and is
+fairly intuitive. For example, ``int x=12, y, z=11;`` declares ``x`` as an ``int`` with
+value ``12``\ , ``y`` as an ``int`` with an indeterminate value, and ``z`` as an ``int`` with value ``11``.
+
+However, initialization provides an opportunity to also initialize
+aggregate types such as arrays. Outside of its declaration, an array may only
+be assigned by assigning to each of its elements individually. However, in a
+declaration, the special *brace-enclosed-list* initializer can be used to
+assign an entire array in a single operation. 
+
+For example, ``int arr[10] = {1, 2};`` initializes ``arr[0]`` to ``1`` and ``arr[2]``
+to ``2``. The remaining elements of the array that are not explicitly initialized
+in the brace-enclosed-list are assigned a value of ``0``. Specific indices can
+also be assigned, such as ``int arr[10] = {[4]=3}`` which initializes ``arr[4]`` to
+``3`` and the remaining elements to ``0``. Commonly, arrays are zero-initialized by
+explicitly initializing the first element to ``0``\ , and allowing the remaining
+elements to implicitly initialize to ``0`` as well: ``int arr[10] = {0};``
+initializes all the elements of ``arr`` to ``0``.
+
+When a brace-enclosed-list is provided, the dimensions of the outermost array
+may be ommitted, and will be calculated by the compiler for you: ``int arr[] =
+{0, 1, 2, 3};`` produces an array of four integers. Note that for nested arrays,
+this only works for the outermost level: ``int arr[10][] = {{1,2,3}, {4,5,6}};``
+produces an array of two arrays of ten integers, which have their first three
+values intialized to ``1``\ , ``2``\ , and ``3``\ , and ``4``\ , ``5``\ , and ``6``\ , respectively,
+with the remaining elements zero-initialized.
+
+Special Case: String-literal initialization
+-------------------------------------------
+
+A *special case* exists for an array of ``char``. A **string-literal** can be used
+to initialize such an array, and it works just as it would if the characters of the 
+string literal were split into a brace-enclosed-list of character constants. The
+following two initializations are equivalent:
+
+.. code-block:: c
+
+   char str[15] = "Hello world!";
+   char str[15] = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd', '!'};
+
+One special thing to note is that, if the array is declared with an unknown
+size and initialized with a string literal, an additional ``'\0'`` null byte
+will be added to the end of the array to terminate the string. The following
+two initializations are equivalent, and result in an array of length 13,
+**not** 12:
+
+.. code-block:: c
+
+   char str[] = "Hello world!";
+   char str[] = {'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd', '!', '\0'};
+
+
+.. raw:: html
+
+   <div class="notebox">
+
+   **Strings and null terminators**
+
+   Strings are sequences of characters (`char`) that are terminated with a null
+   byte (`'\0'`). An object that is an array of `char` can contain zero, one, or
+   several strings. Every character position in a string is also, by definition,
+   the start of a string, itself, since it is the beginning of a sequence of
+   characters that ends in a null byte. String manipulation is a significant
+   aspect of systems programming, and we will spend quite a bit of time learning
+   tools and techniques for doing this.
+
+   In the example with a fixed-size array, the null byte was implicitly added
+   simply because the array was explicitly sized larger than the number of
+   characters in the string, thus the remaining elements were zero-initialized. If
+   the explicit size does not leave room for a null byte, it will not be present
+   in the array! This is a **common** mistake! Because the length of a string is
+   determined by the location of the first null byte, a missing null byte can
+   easily result in buffer overflows &ndash; reading past the end of the object
+   that the "string" appears in &ndash; which represent a major source of security
+   vulnerabilities and bugs.
+   </div>
+
+
+Implicit Initialization
+-----------------------
+
+If a declaration does not include an initializer:
+
+
+* Objects with automatic storage duration are initialized with indeterminate
+  values. Using such a value may result in undefined behavior!
+* Objects with static storage duration are empty-initialized.
+
+  * pointers are initialized to the null pointer value of their type
+  * integers are initialized to unsigned zero
+  * floats are initialized to ``+0``
+  * aggregate types are recursively empty-initialized and any padding bits are
+    initialized to zero.
