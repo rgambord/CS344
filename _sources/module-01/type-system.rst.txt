@@ -370,8 +370,7 @@ Floating Types
 Floating point arithmetic is a topic all on its own, and not something we will
 cover in this class. The floating types are rarely ever used in systems programming
 since they cannot accurately represent most numbers and they are costly in terms
-of size and performance characteristics. Besides, we don't want to concern ourselves
-with questions such as whether `0.1 + 0.2 == 0.3` is true!
+of size and performance characteristics.
 
 
 Derived Types
